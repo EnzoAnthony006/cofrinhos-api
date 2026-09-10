@@ -43,6 +43,9 @@ public class Cofrinho{
         return new Cofrinho(UUID.randomUUID(), usuarioId, nome, descricao,
                 categoria, valorMeta, Dinheiro.zero(), StatusCofrinho.ATIVO);
     }
+    public void arquivar() {
+        this.status = StatusCofrinho.ARQUIVADO;
+    }
 
     public void registrarAporte(Dinheiro valor) {
         if (status == StatusCofrinho.ARQUIVADO) {
