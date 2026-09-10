@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: cofrinhos-postgres
+    environment:
+      POSTGRES_DB: cofrinhos
+      POSTGRES_USER: cofrinhos
+      POSTGRES_PASSWORD: cofrinhos
+    ports:
+      - "5432:5432"
+    volumes:
+      - cofrinhos-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cofrinhos"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  cofrinhos-postgres-data:
