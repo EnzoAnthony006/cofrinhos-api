@@ -1,4 +1,7 @@
 package com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain;
 
-public class StatusCofrinho {
+public enum StatusCofrinho {
+    ATIVO,
+    CONCLUIDO,
+    ARQUIVADO
 }
