@@ -1,16 +1,17 @@
 package com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.cofrinho;
 
+
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.CategoriaInvestimento;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Cofrinho;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Dinheiro;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.StatusCofrinho;
-import org.junit.Test;
+import org.junit.Assert;
+import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CofrinhoTest {
 
@@ -21,8 +22,8 @@ class CofrinhoTest {
         Cofrinho cofrinho = Cofrinho.criar(usuarioId, "Viagem dos sonhos", "Europa em 2027",
                 CategoriaInvestimento.ECONOMIA, Dinheiro.de(new BigDecimal("5000")));
 
-        assertEquals(StatusCofrinho.ATIVO, cofrinho.getStatus());
-        assertEquals(Dinheiro.zero(), cofrinho.getValorAcumulado());
+        Assert.assertEquals(StatusCofrinho.ATIVO, cofrinho.getStatus());
+        Assert.assertEquals(Dinheiro.zero(), cofrinho.getValorAcumulado());
     }
 
     @Test
@@ -46,7 +47,7 @@ class CofrinhoTest {
 
         cofrinho.registrarAporte(Dinheiro.de(new BigDecimal("500")));
 
-        assertEquals(Dinheiro.de(new BigDecimal("500")), cofrinho.getValorAcumulado());
+        Assert.assertEquals(Dinheiro.de(new BigDecimal("500")), cofrinho.getValorAcumulado());
     }
 
     @Test
@@ -56,7 +57,7 @@ class CofrinhoTest {
 
         cofrinho.registrarAporte(Dinheiro.de(new BigDecimal("1000")));
 
-        assertEquals(StatusCofrinho.CONCLUIDO, cofrinho.getStatus());
+        Assert.assertEquals(StatusCofrinho.CONCLUIDO, cofrinho.getStatus());
     }
 
     @Test
