@@ -1,4 +1,4 @@
-package com.enzoanthonydev.cofrinhos.cofrinhos_api.application.cofrinho.cofrinho;
+package com.enzoanthonydev.cofrinhos.cofrinhos_api.application.cofrinho;
 
 public enum CategoriaInvestimento {
     RENDA_FIXA,
