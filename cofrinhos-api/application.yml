@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: cofrinhos-api
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cofrinhos
+    username: cofrinhos
+    password: cofrinhos
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+
+server:
+  port: 8080
