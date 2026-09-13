@@ -43,6 +43,12 @@ public class Cofrinho{
         return new Cofrinho(UUID.randomUUID(), usuarioId, nome, descricao,
                 categoria, valorMeta, Dinheiro.zero(), StatusCofrinho.ATIVO);
     }
+    public static Cofrinho reconstruir(UUID id, UUID usuarioId, String nome, String descricao,
+                                       CategoriaInvestimento categoria, Dinheiro valorMeta,
+                                       Dinheiro valorAcumulado, StatusCofrinho status) {
+        return new Cofrinho(id, usuarioId, nome, descricao, categoria, valorMeta, valorAcumulado, status);
+    }
+
     public void arquivar() {
         this.status = StatusCofrinho.ARQUIVADO;
     }
