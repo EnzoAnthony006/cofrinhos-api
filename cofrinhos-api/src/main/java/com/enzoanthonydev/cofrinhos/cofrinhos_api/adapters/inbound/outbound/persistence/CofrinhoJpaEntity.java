@@ -37,7 +37,6 @@ public class CofrinhoJpaEntity {
     private StatusCofrinho status;
 
     protected CofrinhoJpaEntity() {
-        // construtor exigido pelo JPA/Hibernate, não use diretamente
     }
 
     public CofrinhoJpaEntity(UUID id, UUID usuarioId, String nome, String descricao,
