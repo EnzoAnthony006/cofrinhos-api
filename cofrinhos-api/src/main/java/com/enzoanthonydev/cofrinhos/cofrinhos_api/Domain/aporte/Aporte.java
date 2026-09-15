@@ -29,6 +29,10 @@ public class Aporte {
     public static Aporte registrar(UUID cofrinhoId, Dinheiro valor) {
         return new Aporte(UUID.randomUUID(), cofrinhoId, valor, LocalDateTime.now());
     }
+    public static Aporte reconstruir(UUID id, UUID cofrinhoId, Dinheiro valor, LocalDateTime dataRegistro) {
+        return new Aporte(id, cofrinhoId, valor, dataRegistro);
+    }
+
     public UUID getId() { return id; }
     public UUID getCofrinhoId() { return cofrinhoId; }
     public Dinheiro getValor() { return valor; }
