@@ -4,6 +4,7 @@ import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Cofrinho;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Dinheiro;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.aporte.Aporte;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.CofrinhoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -14,12 +15,13 @@ public class RegistrarAporteUseCase {
     private final CofrinhoRepository cofrinhoRepository;
     private final AporteRepository aporteRepository;
 
-    public RegistrarAporteUseCase ( CofrinhoRepository cofrinhoRepository, AporteRepository aporteRepository) {
+    public RegistrarAporteUseCase(CofrinhoRepository cofrinhoRepository, AporteRepository aporteRepository) {
         this.cofrinhoRepository = cofrinhoRepository;
         this.aporteRepository = aporteRepository;
     }
 
-    public Aporte executar (UUID cofrinhoId, Dinheiro valor) {
+    @Transactional
+    public Aporte executar(UUID cofrinhoId, Dinheiro valor) {
         Cofrinho cofrinho = cofrinhoRepository.buscarPorId(cofrinhoId)
                 .orElseThrow(() -> new IllegalArgumentException("Cofrinho não encontrado: " + cofrinhoId));
 
