@@ -4,8 +4,8 @@ import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Cofrinho;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Dinheiro;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.aporte.Aporte;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.CofrinhoRepository;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -14,10 +14,14 @@ public class RegistrarAporteUseCase {
 
     private final CofrinhoRepository cofrinhoRepository;
     private final AporteRepository aporteRepository;
+    private final AporteEventPublisher aporteEventPublisher;
 
-    public RegistrarAporteUseCase(CofrinhoRepository cofrinhoRepository, AporteRepository aporteRepository) {
+    public RegistrarAporteUseCase(CofrinhoRepository cofrinhoRepository,
+                                  AporteRepository aporteRepository,
+                                  AporteEventPublisher aporteEventPublisher) {
         this.cofrinhoRepository = cofrinhoRepository;
         this.aporteRepository = aporteRepository;
+        this.aporteEventPublisher = aporteEventPublisher;
     }
 
     @Transactional
@@ -29,6 +33,16 @@ public class RegistrarAporteUseCase {
         cofrinhoRepository.salvar(cofrinho);
 
         Aporte aporte = Aporte.registrar(cofrinhoId, valor);
-        return aporteRepository.salvar(aporte);
+        Aporte aporteSalvo = aporteRepository.salvar(aporte);
+
+        aporteEventPublisher.publicar(new AporteRegistradoEvent(
+                aporteSalvo.getId(),
+                cofrinhoId,
+                cofrinho.getUsuarioId(),
+                valor.valor(),
+                aporteSalvo.getDataRegistro()
+        ));
+
+        return aporteSalvo;
     }
 }
