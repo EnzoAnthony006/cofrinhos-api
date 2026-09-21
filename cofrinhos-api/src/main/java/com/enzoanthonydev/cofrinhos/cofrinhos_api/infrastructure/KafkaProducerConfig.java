@@ -12,7 +12,7 @@ public class KafkaProducerConfig {
 
     @Bean
     public ProducerFactory<String, Object> producerFactory(KafkaProperties kafkaProperties) {
-        return new DefaultKafkaProducerFactory<>(kafkaProperties.buildProducerProperties(null));
+        return new DefaultKafkaProducerFactory<>(kafkaProperties.buildProducerProperties());
     }
 
     @Bean
