@@ -10,15 +10,14 @@ public class KafkaAporteEventPublisher implements AporteEventPublisher {
 
     private static final String TOPICO = "aporte-registrado";
 
-    private final KafkaTemplate<String, AporteRegistradoEvent> kafkaTemplate;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
 
-
-    public KafkaAporteEventPublisher(KafkaTemplate<String, AporteRegistradoEvent> kafkaTemplate) {
+    public KafkaAporteEventPublisher(KafkaTemplate<String, Object> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
-    @Override
-    public void publicar(AporteRegistradoEvent event) {
-        kafkaTemplate.send(TOPICO, event.cofrinhoId().toString(), event);
-    }
 
+    @Override
+    public void publicar(AporteRegistradoEvent evento) {
+        kafkaTemplate.send(TOPICO, evento.cofrinhoId().toString(), evento);
+    }
 }
