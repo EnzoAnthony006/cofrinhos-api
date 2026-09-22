@@ -17,6 +17,10 @@ public class Streak {
     public static Streak iniciar() {
         return new Streak(0, 0, null);
     }
+    public static Streak reconstruir (int sequenciaAtual, int melhorSequencia, LocalDate dataUltimaAtividade) {
+       return new Streak(sequenciaAtual, melhorSequencia, dataUltimaAtividade);
+
+    }
 
     public void registrarAtividade(LocalDate data) {
         if (dataUltimaAtividade == null || diasDesdeUltimaAtividade(data) <= 7) {
