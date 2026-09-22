@@ -1,4 +1,14 @@
 package com.enzoanthonydev.cofrinhos.cofrinhos_api.adapters.inbound.messaging;
 
+import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.aporte.AporteRegistradoEvent;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Component;
+
+@Component
 public class AporteRegistradoConsumer {
+
+    @KafkaListener(topics = "aporte-registrado" , groupId = "cofrinhos-api" )
+    public void consumir (AporteRegistradoEvent evento){
+        System.out.println("Evento recebido do Kafka" + evento);
+    }
 }
