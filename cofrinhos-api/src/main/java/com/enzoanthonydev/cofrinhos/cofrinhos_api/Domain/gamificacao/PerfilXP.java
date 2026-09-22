@@ -26,6 +26,10 @@ public class PerfilXP {
     public void registrarAtividadeStreak(LocalDate data) {
         streakGlobal.registrarAtividade(data);
     }
+    public static PerfilXP reconstruir(UUID usuarioId, int xpTotal, Streak streakGlobal) {
+        return new PerfilXP(usuarioId, xpTotal, streakGlobal);
+    }
+
     public int getNivel() {
         return (xpTotal / 500 ) + 1;
     }
