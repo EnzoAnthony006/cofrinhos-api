@@ -14,8 +14,8 @@ public class AporteRegistradoConsumer {
         this.processarAporteRegistradoUseCase = processarAporteRegistradoUseCase;
     }
 
-    @KafkaListener(topics = "aporte-registrado" , groupId = "cofrinhos-api" )
-    public void consumir (AporteRegistradoEvent evento){
-        System.out.println("Evento recebido do Kafka" + evento);
+    @KafkaListener(topics = "aporte-registrado", groupId = "cofrinhos-api")
+    public void consumir(AporteRegistradoEvent evento) {
+        processarAporteRegistradoUseCase.executar(evento);
     }
 }
