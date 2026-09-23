@@ -1,6 +1,6 @@
 package com.enzoanthonydev.cofrinhos.cofrinhos_api.adapters.inbound.messaging;
 
-import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.gamificacao.ProcessarAporteRegistradoUseCase;
+import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.gamificacao.ProcessarAporteRegistradoUseCase;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.aporte.AporteRegistradoEvent;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;

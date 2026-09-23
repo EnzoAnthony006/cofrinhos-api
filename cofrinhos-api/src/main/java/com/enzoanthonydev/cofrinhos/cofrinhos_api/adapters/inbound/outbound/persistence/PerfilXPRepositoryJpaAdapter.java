@@ -1,7 +1,7 @@
 package com.enzoanthonydev.cofrinhos.cofrinhos_api.adapters.inbound.outbound.persistence;
 
+import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.gamificacao.PerfilXPRepository;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.gamificacao.PerfilXP;
-import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.gamificacao.PerfilXPRepository;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.gamificacao.Streak;
 import org.springframework.stereotype.Component;
 
