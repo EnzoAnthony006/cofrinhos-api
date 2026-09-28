@@ -40,7 +40,9 @@ public class RegistrarAporteUseCase {
                 cofrinhoId,
                 cofrinho.getUsuarioId(),
                 valor.valor(),
-                aporteSalvo.getDataRegistro()
+                aporteSalvo.getDataRegistro(),
+                cofrinho.getStatus(),
+                cofrinho.getCategoria()
         ));
 
         return aporteSalvo;
