@@ -17,20 +17,21 @@ public class ConquistaDesbloqueada {
         this.usuarioId = usuarioId;
         this.definicao = definicao;
         this.dataDesbloqueio = dataDesbloqueio;
+    }
 
+    public static ConquistaDesbloqueada desbloquear(UUID usuarioId, DefinicaoConquista definicao) {
+        return new ConquistaDesbloqueada(UUID.randomUUID(), usuarioId, definicao, LocalDateTime.now());
     }
-    public UUID getId() {
-        return id;
+
+    public static ConquistaDesbloqueada reconstruir(UUID id, UUID usuarioId, DefinicaoConquista definicao,
+                                                    LocalDateTime dataDesbloqueio) {
+        return new ConquistaDesbloqueada(id, usuarioId, definicao, dataDesbloqueio);
     }
-    public UUID getUsuarioId() {
-        return usuarioId;
-    }
-    public DefinicaoConquista getDefinicao() {
-        return definicao;
-    }
-    public LocalDateTime getDataDesbloqueio() {
-        return dataDesbloqueio;
-    }
+
+    public UUID getId() { return id; }
+    public UUID getUsuarioId() { return usuarioId; }
+    public DefinicaoConquista getDefinicao() { return definicao; }
+    public LocalDateTime getDataDesbloqueio() { return dataDesbloqueio; }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,7 +39,5 @@ public class ConquistaDesbloqueada {
         return this.id.equals(outra.id);
     }
     @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+    public int hashCode() { return Objects.hash(id); }
 }
