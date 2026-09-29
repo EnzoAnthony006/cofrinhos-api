@@ -18,9 +18,9 @@ public class ConquistaJpaEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private DefinicaoConquista definicaoConquista;
+    private DefinicaoConquista definicao;
 
-    @Column(name = "data_desbloqueio", nullable = false )
+    @Column(name = "data_desbloqueio", nullable = false)
     private LocalDateTime dataDesbloqueio;
 
     protected ConquistaJpaEntity() {
@@ -29,7 +29,7 @@ public class ConquistaJpaEntity {
     public ConquistaJpaEntity(UUID id, UUID usuarioId, DefinicaoConquista definicao, LocalDateTime dataDesbloqueio) {
         this.id = id;
         this.usuarioId = usuarioId;
-        this.definicaoConquista = definicao;
+        this.definicao = definicao;
         this.dataDesbloqueio = dataDesbloqueio;
     }
     public UUID getId() {
@@ -39,7 +39,7 @@ public class ConquistaJpaEntity {
         return usuarioId;
     }
     public DefinicaoConquista getDefinicao() {
-        return definicaoConquista;
+        return definicao;
     }
     public LocalDateTime getDataDesbloqueio() {
         return dataDesbloqueio;
