@@ -10,6 +10,5 @@ public interface ConquistaSpringDataRepository extends JpaRepository<ConquistaJp
 
     List<ConquistaJpaEntity> findByUsuarioId(UUID usuarioId);
 
-    boolean existByUsuarioIdAnDefinicao(UUID usuarioId, DefinicaoConquista definicao);
-
+    boolean existsByUsuarioIdAndDefinicao(UUID usuarioId, DefinicaoConquista definicao);
 }
