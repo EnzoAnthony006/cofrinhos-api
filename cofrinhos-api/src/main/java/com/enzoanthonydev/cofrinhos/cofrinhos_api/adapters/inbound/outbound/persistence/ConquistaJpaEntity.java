@@ -11,7 +11,7 @@ import java.util.UUID;
 public class ConquistaJpaEntity {
 
     @Id
-    private UUID id:
+    private UUID id;
 
     @Column(name = "usuario_id", nullable = false)
     private UUID usuarioId;
