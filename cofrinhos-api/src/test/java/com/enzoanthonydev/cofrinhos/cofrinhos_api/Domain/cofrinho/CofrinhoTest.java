@@ -4,8 +4,7 @@ import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.CategoriaInvestimento;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Cofrinho;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Dinheiro;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.StatusCofrinho;
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.UUID;
 
