@@ -52,7 +52,7 @@ class ProcessarAporteRegistradoUseCaseTest {
         PerfilXP perfilSalvo = captor.getValue();
         assertEquals(usuarioId, perfilSalvo.getUsuarioId());
         assertEquals(1, perfilSalvo.getStreakGlobal().getSequenciaAtual());
-        assertEquals(25, perfilSalvo.getXpTotal()); // 10 (base) + 10 (100/10) + 5 (1a semana de streak * 5)
+        assertEquals(25, perfilSalvo.getXpTotal());
     }
 
     @Test
@@ -75,7 +75,7 @@ class ProcessarAporteRegistradoUseCaseTest {
         verify(perfilXPRepository).salvar(captor.capture());
 
         PerfilXP perfilSalvo = captor.getValue();
-        assertEquals(4, perfilSalvo.getStreakGlobal().getSequenciaAtual()); // 1/jan -> 5/jan, 4 dias, dentro da janela de 7
-        assertEquals(135, perfilSalvo.getXpTotal()); // 100 (ja tinha) + 10 (base) + 5 (50/10) + 20 (4 semanas de streak * 5)
+        assertEquals(4, perfilSalvo.getStreakGlobal().getSequenciaAtual());
+        assertEquals(135, perfilSalvo.getXpTotal());
     }
 }
