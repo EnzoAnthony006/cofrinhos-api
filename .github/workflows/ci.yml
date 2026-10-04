@@ -9,6 +9,10 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: cofrinhos-api
+
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
@@ -19,6 +23,7 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+          cache-dependency-path: cofrinhos-api/pom.xml
 
       - name: Dar permissão de execução ao Maven Wrapper
         run: chmod +x mvnw
