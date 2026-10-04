@@ -3,6 +3,7 @@ package com.enzoanthonydev.cofrinhos.cofrinhos_api.adapters.inbound.rest;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Cofrinho;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Dinheiro;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.BuscarCofrinhoUseCase;
+import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.CofrinhoResumo;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.CriarCofrinhoUseCase;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -37,7 +38,7 @@ public class CofrinhoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CofrinhoResponse> buscarPorId(@PathVariable UUID id) {
-        Cofrinho cofrinho = buscarCofrinhoUseCase.executar(id);
-        return ResponseEntity.ok(CofrinhoResponse.de(cofrinho));
+        CofrinhoResumo resumo = buscarCofrinhoUseCase.executar(id);
+        return ResponseEntity.ok(CofrinhoResponse.de(resumo));
     }
 }
