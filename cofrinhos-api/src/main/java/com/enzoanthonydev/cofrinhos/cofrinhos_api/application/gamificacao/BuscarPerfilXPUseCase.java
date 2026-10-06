@@ -3,6 +3,7 @@ package com.enzoanthonydev.cofrinhos.cofrinhos_api.application.gamificacao;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.gamificacao.PerfilXP;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -15,7 +16,11 @@ public class BuscarPerfilXPUseCase {
     }
 
     public PerfilXP executar(UUID usuarioId) {
-        return perfilXPRepository.buscarPorUsuarioId(usuarioId)
+        return buscarSeExistir(usuarioId)
                 .orElseThrow(() -> new IllegalArgumentException("Perfil de XP não encontrado para o usuário: " + usuarioId));
+    }
+
+    public Optional<PerfilXP> buscarSeExistir(UUID usuarioId) {
+        return perfilXPRepository.buscarPorUsuarioId(usuarioId);
     }
 }
