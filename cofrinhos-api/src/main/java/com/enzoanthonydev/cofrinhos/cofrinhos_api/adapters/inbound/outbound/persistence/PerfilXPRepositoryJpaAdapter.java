@@ -5,6 +5,7 @@ import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.gamificacao.PerfilXP;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.gamificacao.Streak;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -16,16 +17,23 @@ public class PerfilXPRepositoryJpaAdapter implements PerfilXPRepository {
     public PerfilXPRepositoryJpaAdapter(PerfilXPSpringDataRepository springDataRepository) {
         this.springDataRepository = springDataRepository;
     }
+
     @Override
     public PerfilXP salvar(PerfilXP perfilXP) {
         PerfilXPJpaEntity entitySalva = springDataRepository.save(paraEntity(perfilXP));
         return paraDominio(entitySalva);
-
     }
+
     @Override
     public Optional<PerfilXP> buscarPorUsuarioId(UUID usuarioId) {
         return springDataRepository.findById(usuarioId).map(this::paraDominio);
     }
+
+    @Override
+    public List<PerfilXP> buscarTodos() {
+        return springDataRepository.findAll().stream().map(this::paraDominio).toList();
+    }
+
     private PerfilXPJpaEntity paraEntity(PerfilXP perfilXP) {
         Streak streak = perfilXP.getStreakGlobal();
         return new PerfilXPJpaEntity(perfilXP.getUsuarioId(),
@@ -35,6 +43,7 @@ public class PerfilXPRepositoryJpaAdapter implements PerfilXPRepository {
                 streak.getDataUltimaAtividade()
         );
     }
+
     private PerfilXP paraDominio(PerfilXPJpaEntity entity) {
         Streak streak = Streak.reconstruir(entity.getSequenciaAtual(),
                 entity.getMelhorSequencia(),
