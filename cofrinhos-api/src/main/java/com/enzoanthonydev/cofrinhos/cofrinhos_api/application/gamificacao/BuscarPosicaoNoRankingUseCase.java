@@ -14,6 +14,6 @@ public class BuscarPosicaoNoRankingUseCase {
         this.rankingXPRepository = rankingXPRepository;
     }
     public Optional<PosicaoRanking> buscarPosicao(UUID usuarioId) {
-        return rankingXPRepository.buscarPosicao(usuarioId)
+        return rankingXPRepository.buscarPosicao(usuarioId);
     }
 }
