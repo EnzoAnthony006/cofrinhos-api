@@ -13,6 +13,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -96,5 +97,29 @@ class RankingXPRedisAdapterTest {
 
         assertEquals(1, ranking.size());
         assertEquals(new PosicaoRanking(1, usuarioId, 135), ranking.get(0));
+    }
+
+    @Test
+    void deveRetornarPosicaoEXpDoUsuarioNoRanking() {
+        UUID usuarioA = UUID.randomUUID();
+        UUID usuarioB = UUID.randomUUID();
+        UUID usuarioC = UUID.randomUUID();
+        adapter.atualizarXP(usuarioA, 25);
+        adapter.atualizarXP(usuarioB, 65);
+        adapter.atualizarXP(usuarioC, 35);
+
+        Optional<PosicaoRanking> posicao = adapter.buscarPosicao(usuarioC);
+
+        assertTrue(posicao.isPresent());
+        assertEquals(new PosicaoRanking(2, usuarioC, 35), posicao.get());
+    }
+
+    @Test
+    void deveRetornarVazioQuandoUsuarioNaoEstaNoRanking() {
+        adapter.atualizarXP(UUID.randomUUID(), 50);
+
+        Optional<PosicaoRanking> posicao = adapter.buscarPosicao(UUID.randomUUID());
+
+        assertTrue(posicao.isEmpty());
     }
 }
