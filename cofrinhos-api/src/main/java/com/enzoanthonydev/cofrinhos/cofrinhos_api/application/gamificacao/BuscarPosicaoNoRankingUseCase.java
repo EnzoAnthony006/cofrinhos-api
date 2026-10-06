@@ -1,9 +1,9 @@
 package com.enzoanthonydev.cofrinhos.cofrinhos_api.application.gamificacao;
 
-import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 import java.util.UUID;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class BuscarPosicaoNoRankingUseCase {
@@ -13,7 +13,8 @@ public class BuscarPosicaoNoRankingUseCase {
     public BuscarPosicaoNoRankingUseCase(RankingXPRepository rankingXPRepository) {
         this.rankingXPRepository = rankingXPRepository;
     }
-    public Optional<PosicaoRanking> buscarPosicao(UUID usuarioId) {
+
+    public Optional<PosicaoRanking> executar(UUID usuarioId) {
         return rankingXPRepository.buscarPosicao(usuarioId);
     }
 }
