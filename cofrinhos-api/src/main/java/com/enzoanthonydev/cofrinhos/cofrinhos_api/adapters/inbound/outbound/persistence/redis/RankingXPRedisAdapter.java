@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -46,6 +47,18 @@ public class RankingXPRedisAdapter implements RankingXPRepository {
             ));
         }
         return ranking;
+    }
+
+    @Override
+    public Optional<PosicaoRanking> buscarPosicao(UUID usuarioId) {
+        String membro = usuarioId.toString();
+        Long indice = redisTemplate.opsForZSet().reverseRank(CHAVE_RANKING, membro);
+        Double score = redisTemplate.opsForZSet().score(CHAVE_RANKING, membro);
+
+        if (indice == null || score == null) {
+            return Optional.empty();
+        }
+        return Optional.of(new PosicaoRanking(indice.intValue() + 1, usuarioId, score.intValue()));
     }
 }
 
