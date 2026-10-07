@@ -1,11 +1,12 @@
-package com.enzoanthonydev.cofrinhos.cofrinhos_api.application.metrics;
+package com.enzoanthonydev.cofrinhos.cofrinhos_api.adapters.inbound.outbound.metrics;
 
-import io.micrometer.core.instrument.MeterRegistry;
+import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.metrics.MetricasNegocio;
 import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MicrometerMetricasNegocio  implements MetricasNegocio {
+public class MicrometerMetricasNegocio implements MetricasNegocio {
 
     private final MeterRegistry registry;
 
@@ -17,7 +18,7 @@ public class MicrometerMetricasNegocio  implements MetricasNegocio {
     public void aporteRegistrado(String categoria) {
         Counter.builder("cofrinhos.aportes.registrados")
                 .description("Aportes registrados, por categoria do cofrinho")
-                .tags("categoria", categoria)
+                .tag("categoria", categoria)
                 .register(registry)
                 .increment();
     }
@@ -28,17 +29,15 @@ public class MicrometerMetricasNegocio  implements MetricasNegocio {
                 .description("Total de XP concedido aos usuários")
                 .register(registry)
                 .increment(xp);
-
     }
 
     @Override
     public void conquistaDesbloqueada(String conquista) {
         Counter.builder("cofrinhos.conquistas.desbloqueadas")
                 .description("Conquistas desbloqueadas, por tipo")
-                .tags("conquista", conquista)
+                .tag("conquista", conquista)
                 .register(registry)
                 .increment();
-
     }
 
     @Override
@@ -47,6 +46,5 @@ public class MicrometerMetricasNegocio  implements MetricasNegocio {
                 .description("Falhas ao atualizar o ranking de XP no Redis")
                 .register(registry)
                 .increment();
-
     }
 }
