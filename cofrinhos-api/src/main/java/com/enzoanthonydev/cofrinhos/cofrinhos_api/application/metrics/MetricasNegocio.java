@@ -1,4 +1,4 @@
-package com.enzoanthonydev.cofrinhos.cofrinhos_api.application;
+package com.enzoanthonydev.cofrinhos.cofrinhos_api.application.metrics;
 
 public interface MetricasNegocio {
 
