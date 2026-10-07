@@ -26,15 +26,10 @@ spring:
 
   data:
     redis:
-      spring:
-        data:
-          redis:
-            host: localhost
-            port: 6379
-            repositories:
-              enabled: false
       host: localhost
       port: 6379
+      repositories:
+        enabled: false
 
 management:
   endpoints:
@@ -44,6 +39,12 @@ management:
   endpoint:
     health:
       show-details: when-authorized
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
 
 server:
   port: 8080
