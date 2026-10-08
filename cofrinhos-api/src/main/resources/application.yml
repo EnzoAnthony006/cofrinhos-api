@@ -23,6 +23,10 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: com.enzoanthonydev.cofrinhos.cofrinhos_api.application.aporte
+    template:
+      observation-enabled: true
+    listener:
+      observation-enabled: true
 
   data:
     redis:
@@ -45,6 +49,14 @@ management:
     distribution:
       percentiles-histogram:
         http.server.requests: true
+  tracing:
+    sampling:
+      probability: 1.0
+  opentelemetry:
+    tracing:
+      export:
+        otlp:
+          endpoint: http://localhost:4318/v1/traces
 
 server:
   port: 8080
