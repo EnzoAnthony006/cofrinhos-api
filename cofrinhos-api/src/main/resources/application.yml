@@ -34,7 +34,6 @@ spring:
       port: 6379
       repositories:
         enabled: false
-
 management:
   endpoints:
     web:
@@ -49,6 +48,10 @@ management:
     distribution:
       percentiles-histogram:
         http.server.requests: true
+  otlp:
+    metrics:
+      export:
+        enabled: false
   tracing:
     sampling:
       probability: 1.0
