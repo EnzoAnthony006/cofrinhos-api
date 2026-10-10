@@ -79,6 +79,19 @@ services:
       - "4317:4317"
       - "4318:4318"
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0.7
+    container_name: cofrinhos-keycloak
+    command: start-dev
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    ports:
+      - "8081:8080"
+    volumes:
+      - cofrinhos-keycloak-data:/opt/keycloak/data
+
 volumes:
   cofrinhos-postgres-data:
   cofrinhos-grafana-data:
+  cofrinhos-keycloak-data:
