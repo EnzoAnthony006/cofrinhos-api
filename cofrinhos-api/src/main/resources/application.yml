@@ -34,6 +34,13 @@ spring:
       port: 6379
       repositories:
         enabled: false
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/realms/cofrinhos
+
 management:
   endpoints:
     web:
