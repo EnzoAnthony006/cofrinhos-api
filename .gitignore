@@ -1,0 +1,36 @@
+# Build
+target/
+HELP.md
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated/
+.sts4/
+
+# Segredos e configuracao local
+.env
+.env.*
+!.env.example
+application-local.*
+application-secrets.*
+*.pem
+*.key
+*.p12
+*.jks
+
+# Logs e sistema operacional
+*.log
+logs/
+Thumbs.db
+.DS_Store
+
+# Front-end
+node_modules/
