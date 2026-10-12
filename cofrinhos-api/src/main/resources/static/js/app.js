@@ -1,9 +1,9 @@
 import { iniciarAutenticacao, login, logout, usuarioAtual } from './auth.js';
 import {
+    acompanharRanking,
     buscarDashboard,
     criarCofrinho,
     listarCofrinhos,
-    listarRanking,
     registrarAporte,
 } from './api.js';
 import {
@@ -11,12 +11,14 @@ import {
     abreviarId,
     el,
     formatarData,
+    formatarDataHora,
     formatarMoeda,
     formatarNumero,
     formatarPercentual,
     humanizar,
     mostrarToast,
     rotuloCategoria,
+    rotuloConquista,
 } from './ui.js';
 
 const telaLogin = document.getElementById('tela-login');
@@ -27,6 +29,8 @@ const nomeUsuario = document.getElementById('usuario-nome');
 const conteudoDashboard = document.getElementById('conteudo-dashboard');
 const listaCofrinhos = document.getElementById('lista-cofrinhos');
 const listaRanking = document.getElementById('lista-ranking');
+const estadoRanking = document.getElementById('estado-ranking');
+const estadoRankingTexto = document.getElementById('estado-ranking-texto');
 const formNovoCofrinho = document.getElementById('form-novo-cofrinho');
 const botaoNovoCofrinho = document.getElementById('btn-novo-cofrinho');
 const botaoSalvarCofrinho = document.getElementById('btn-salvar-cofrinho');
@@ -36,10 +40,16 @@ const telas = document.querySelectorAll('.tela');
 
 const ROTULOS_STATUS = { ATIVO: 'Ativo', CONCLUIDO: 'Concluído' };
 const CLASSES_STATUS = { ATIVO: 'badge--ativo', CONCLUIDO: 'badge--concluido' };
+const TEXTOS_ESTADO_RANKING = {
+    conectando: 'Conectando...',
+    aovivo: 'Ao vivo',
+    reconectando: 'Reconectando...',
+};
 const LIMITE_RANKING = 10;
 const XP_POR_NIVEL = 500;
 const TENTATIVAS_XP = 6;
 const INTERVALO_XP_MS = 1000;
+const RECONEXAO_RANKING_MS = 2000;
 
 function esperar(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -79,6 +89,21 @@ function criarCartaoNivel(perfil) {
     return cartao;
 }
 
+function criarCartaoConquista(conquista) {
+    const cartao = el('article', 'card conquista');
+    const icone = el('span', 'conquista__icone', '★');
+    icone.setAttribute('aria-hidden', 'true');
+
+    const texto = el('div');
+    texto.append(
+        el('strong', null, rotuloConquista(conquista.definicao)),
+        el('div', 'stat__hint', `Desbloqueada em ${formatarDataHora(conquista.dataDesbloqueio)}`),
+    );
+
+    cartao.append(icone, texto);
+    return cartao;
+}
+
 function criarSecaoConquistas(conquistas) {
     const secao = el('section');
     secao.append(el('h2', 'secao-titulo', 'Conquistas'));
@@ -93,8 +118,9 @@ function criarSecaoConquistas(conquistas) {
         return secao;
     }
 
-    const plural = conquistas.length === 1 ? 'conquista desbloqueada' : 'conquistas desbloqueadas';
-    secao.append(el('div', 'card', `${conquistas.length} ${plural}.`));
+    const grade = el('div', 'grid');
+    grade.append(...conquistas.map(criarCartaoConquista));
+    secao.append(grade);
     return secao;
 }
 
@@ -133,24 +159,35 @@ async function carregarDashboard() {
 }
 
 
-async function lerXpAtual() {
+async function lerGamificacao() {
     try {
-        const { perfil } = await buscarDashboard();
-        return perfil.xpTotal;
+        const { perfil, conquistas } = await buscarDashboard();
+        return {
+            xp: perfil.xpTotal,
+            conquistas: new Set(conquistas.map((conquista) => conquista.definicao)),
+        };
     } catch {
         return null;
     }
 }
 
-async function anunciarXpGanho(xpAntes) {
-    if (xpAntes === null) {
+async function anunciarGanhos(antes) {
+    if (antes === null) {
         return;
     }
     for (let tentativa = 0; tentativa < TENTATIVAS_XP; tentativa += 1) {
         await esperar(INTERVALO_XP_MS);
-        const xpDepois = await lerXpAtual();
-        if (xpDepois !== null && xpDepois > xpAntes) {
-            mostrarToast(`+${formatarNumero(xpDepois - xpAntes)} XP`, 'xp');
+        const depois = await lerGamificacao();
+        if (depois !== null && depois.xp > antes.xp) {
+            mostrarToast(`+${formatarNumero(depois.xp - antes.xp)} XP`, 'xp');
+
+            await esperar(INTERVALO_XP_MS);
+            const final = (await lerGamificacao()) ?? depois;
+            final.conquistas.forEach((definicao) => {
+                if (!antes.conquistas.has(definicao)) {
+                    mostrarToast(`Conquista desbloqueada: ${rotuloConquista(definicao)}`, 'xp');
+                }
+            });
             return;
         }
     }
@@ -159,12 +196,12 @@ async function anunciarXpGanho(xpAntes) {
 async function aportar(cofrinho, valor, campo, botao) {
     botao.disabled = true;
     try {
-        const xpAntes = await lerXpAtual();
+        const antes = await lerGamificacao();
         await registrarAporte(cofrinho.id, valor);
         mostrarToast(`Aporte de ${formatarMoeda(valor)} registrado em "${cofrinho.nome}".`);
         campo.value = '';
         await carregarCofrinhos();
-        anunciarXpGanho(xpAntes);
+        anunciarGanhos(antes);
     } catch (erro) {
         mostrarToast(erro.message, 'erro');
     } finally {
@@ -305,9 +342,27 @@ function prepararFormularioNovoCofrinho() {
 }
 
 
-function criarLinhaRanking(entrada, meuId) {
+let controladorRanking = null;
+let ultimaChaveRanking = null;
+let xpAnteriorRanking = null;
+let minhaPosicao = null;
+
+function definirEstadoRanking(estado) {
+    estadoRanking.dataset.estado = estado;
+    estadoRankingTexto.textContent = TEXTOS_ESTADO_RANKING[estado];
+}
+
+function criarLinhaRanking(entrada, meuId, mudou) {
     const souEu = entrada.usuarioId === meuId;
-    const linha = el('li', `card ranking__item${souEu ? ' ranking__item--eu' : ''}`);
+    const classes = ['card', 'ranking__item'];
+    if (souEu) {
+        classes.push('ranking__item--eu');
+    }
+    if (mudou) {
+        classes.push('ranking__item--atualizado');
+    }
+
+    const linha = el('li', classes.join(' '));
     linha.append(
         el('span', 'ranking__pos', String(entrada.posicao)),
         el('span', 'ranking__nome', souEu ? 'Você' : `Jogador ${abreviarId(entrada.usuarioId)}`),
@@ -316,38 +371,97 @@ function criarLinhaRanking(entrada, meuId) {
     return linha;
 }
 
-async function carregarRanking() {
-    listaRanking.replaceChildren(el('p', 'muted', 'Carregando o ranking...'));
-    try {
-        const [ranking, dashboard] = await Promise.all([listarRanking(LIMITE_RANKING), buscarDashboard()]);
-        const meuId = usuarioAtual().id;
+function renderizarRanking(entradas) {
+    const meuId = usuarioAtual().id;
 
-        if (ranking.length === 0) {
-            const vazio = el('div', 'empty');
-            vazio.append(
-                el('h3', null, 'Ranking vazio'),
-                el('p', null, 'Ninguém pontuou ainda. Registre um aporte para abrir o ranking.'),
-            );
-            listaRanking.replaceChildren(vazio);
+    if (entradas.length === 0) {
+        const vazio = el('div', 'empty');
+        vazio.append(
+            el('h3', null, 'Ranking vazio'),
+            el('p', null, 'Ninguém pontuou ainda. Registre um aporte para abrir o ranking.'),
+        );
+        listaRanking.replaceChildren(vazio);
+        return;
+    }
+
+    const lista = el('ol', 'ranking');
+    entradas.forEach((entrada) => {
+        const mudou = xpAnteriorRanking !== null && xpAnteriorRanking.get(entrada.usuarioId) !== entrada.xpTotal;
+        lista.append(criarLinhaRanking(entrada, meuId, mudou));
+    });
+
+    const estouNaLista = entradas.some((entrada) => entrada.usuarioId === meuId);
+    if (!estouNaLista && minhaPosicao) {
+        lista.append(el('li', 'muted', 'Sua posição'), criarLinhaRanking(minhaPosicao, meuId, false));
+    }
+
+    listaRanking.replaceChildren(lista);
+    xpAnteriorRanking = new Map(entradas.map((entrada) => [entrada.usuarioId, entrada.xpTotal]));
+}
+
+async function atualizarMinhaPosicao(entradas, chave) {
+    try {
+        const { posicaoNoRanking } = await buscarDashboard();
+        minhaPosicao = posicaoNoRanking;
+        if (ultimaChaveRanking === chave) {
+            renderizarRanking(entradas);
+        }
+    } catch {
+    }
+}
+
+function aoReceberRanking(entradas) {
+    definirEstadoRanking('aovivo');
+
+    const chave = JSON.stringify(entradas);
+    if (chave === ultimaChaveRanking) {
+        return;
+    }
+    ultimaChaveRanking = chave;
+    renderizarRanking(entradas);
+
+    const meuId = usuarioAtual().id;
+    if (!entradas.some((entrada) => entrada.usuarioId === meuId)) {
+        atualizarMinhaPosicao(entradas, chave);
+    }
+}
+
+function pararRankingAoVivo() {
+    if (controladorRanking) {
+        controladorRanking.abort();
+        controladorRanking = null;
+    }
+}
+
+async function iniciarRankingAoVivo() {
+    pararRankingAoVivo();
+    const controlador = new AbortController();
+    controladorRanking = controlador;
+    ultimaChaveRanking = null;
+    xpAnteriorRanking = null;
+    minhaPosicao = null;
+
+    listaRanking.replaceChildren(el('p', 'muted', 'Conectando ao ranking ao vivo...'));
+    definirEstadoRanking('conectando');
+
+    let primeiraConexao = true;
+    while (!controlador.signal.aborted) {
+        try {
+            if (!primeiraConexao) {
+                definirEstadoRanking('reconectando');
+            }
+            primeiraConexao = false;
+            await acompanharRanking(LIMITE_RANKING, aoReceberRanking, controlador.signal);
+        } catch (erro) {
+            if (controlador.signal.aborted) {
+                return;
+            }
+            definirEstadoRanking('reconectando');
+        }
+        if (controlador.signal.aborted) {
             return;
         }
-
-        const lista = el('ol', 'ranking');
-        ranking.forEach((entrada) => lista.append(criarLinhaRanking(entrada, meuId)));
-
-        const estouNaLista = ranking.some((entrada) => entrada.usuarioId === meuId);
-        if (!estouNaLista && dashboard.posicaoNoRanking) {
-            lista.append(
-                el('li', 'muted', 'Sua posição'),
-                criarLinhaRanking(dashboard.posicaoNoRanking, meuId),
-            );
-        }
-
-        listaRanking.replaceChildren(lista);
-    } catch (erro) {
-        listaRanking.replaceChildren(
-            el('div', 'notice', `Não foi possível carregar o ranking: ${erro.message}`),
-        );
+        await esperar(RECONEXAO_RANKING_MS);
     }
 }
 
@@ -355,10 +469,13 @@ async function carregarRanking() {
 const CARREGADORES = {
     dashboard: carregarDashboard,
     cofrinhos: carregarCofrinhos,
-    ranking: carregarRanking,
+    ranking: iniciarRankingAoVivo,
 };
 
 function mostrarTela(nome) {
+    if (nome !== 'ranking') {
+        pararRankingAoVivo();
+    }
     telas.forEach((tela) => {
         tela.hidden = tela.id !== `tela-${nome}`;
     });
@@ -397,9 +514,9 @@ async function iniciar() {
 prepararFormularioNovoCofrinho();
 document.getElementById('btn-login').addEventListener('click', () => login());
 document.getElementById('btn-logout').addEventListener('click', () => logout());
-document.getElementById('btn-atualizar-ranking').addEventListener('click', () => carregarRanking());
 abas.forEach((aba) => {
     aba.addEventListener('click', () => mostrarTela(aba.dataset.tela));
 });
+window.addEventListener('pagehide', pararRankingAoVivo);
 
 iniciar();

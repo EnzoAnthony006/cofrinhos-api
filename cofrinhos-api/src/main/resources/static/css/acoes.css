@@ -32,6 +32,53 @@ textarea.input {
     margin: 10px 0 8px;
 }
 
+.ao-vivo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.ao-vivo__ponto {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--gold);
+}
+
+.ao-vivo[data-estado="aovivo"] {
+    color: var(--accent-strong);
+}
+
+.ao-vivo[data-estado="aovivo"] .ao-vivo__ponto {
+    background: var(--accent);
+    animation: pulso 1.6s ease-out infinite;
+}
+
+@keyframes pulso {
+    0% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
+    }
+    100% {
+        box-shadow: 0 0 0 9px transparent;
+    }
+}
+
+.ranking__item--atualizado {
+    animation: piscar 1.4s ease-out;
+}
+
+@keyframes piscar {
+    from {
+        background: var(--gold-soft);
+    }
+}
+
 @media (max-width: 560px) {
     .form-linha {
         grid-template-columns: 1fr;

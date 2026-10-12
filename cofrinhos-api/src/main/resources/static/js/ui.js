@@ -9,6 +9,10 @@ export const ROTULOS_CATEGORIA = {
     ECONOMIA: 'Economia',
 };
 
+export const ROTULOS_CONQUISTA = {
+    STREAK_QUATRO_SEMANAS: 'Quatro semanas seguidas',
+};
+
 export function el(tag, classe, texto) {
     const elemento = document.createElement(tag);
     if (classe) {
@@ -40,6 +44,14 @@ export function formatarData(dataIso) {
     return `${dia}/${mes}/${ano}`;
 }
 
+export function formatarDataHora(dataHoraIso) {
+    if (!dataHoraIso) {
+        return '—';
+    }
+    const [data, hora = ''] = dataHoraIso.split('T');
+    return `${formatarData(data)} ${hora.slice(0, 5)}`.trim();
+}
+
 export function abreviarId(uuid) {
     return String(uuid).slice(0, 8);
 }
@@ -51,6 +63,10 @@ export function humanizar(textoEnum) {
 
 export function rotuloCategoria(categoria) {
     return ROTULOS_CATEGORIA[categoria] ?? humanizar(categoria);
+}
+
+export function rotuloConquista(definicao) {
+    return ROTULOS_CONQUISTA[definicao] ?? humanizar(definicao);
 }
 
 export function mostrarToast(mensagem, tipo = 'info') {

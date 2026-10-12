@@ -94,7 +94,10 @@
     <section class="tela" id="tela-ranking" hidden>
         <div class="tela__header">
             <h1>Ranking</h1>
-            <button class="btn btn--ghost" id="btn-atualizar-ranking">Atualizar</button>
+            <span class="ao-vivo" id="estado-ranking" data-estado="conectando" role="status">
+                    <span class="ao-vivo__ponto"></span>
+                    <span id="estado-ranking-texto">Conectando...</span>
+                </span>
         </div>
         <div id="lista-ranking"></div>
     </section>
