@@ -1,0 +1,2604 @@
+{
+    "id":  "598ea8f8-d450-484b-9119-cf2c29b8f0d8",
+    "realm":  "cofrinhos",
+    "notBefore":  0,
+    "defaultSignatureAlgorithm":  "RS256",
+    "revokeRefreshToken":  false,
+    "refreshTokenMaxReuse":  0,
+    "accessTokenLifespan":  300,
+    "accessTokenLifespanForImplicitFlow":  900,
+    "ssoSessionIdleTimeout":  1800,
+    "ssoSessionMaxLifespan":  36000,
+    "ssoSessionIdleTimeoutRememberMe":  0,
+    "ssoSessionMaxLifespanRememberMe":  0,
+    "offlineSessionIdleTimeout":  2592000,
+    "offlineSessionMaxLifespanEnabled":  false,
+    "offlineSessionMaxLifespan":  5184000,
+    "clientSessionIdleTimeout":  0,
+    "clientSessionMaxLifespan":  0,
+    "clientOfflineSessionIdleTimeout":  0,
+    "clientOfflineSessionMaxLifespan":  0,
+    "accessCodeLifespan":  60,
+    "accessCodeLifespanUserAction":  300,
+    "accessCodeLifespanLogin":  1800,
+    "actionTokenGeneratedByAdminLifespan":  43200,
+    "actionTokenGeneratedByUserLifespan":  300,
+    "oauth2DeviceCodeLifespan":  600,
+    "oauth2DevicePollingInterval":  5,
+    "enabled":  true,
+    "sslRequired":  "external",
+    "registrationAllowed":  false,
+    "registrationEmailAsUsername":  false,
+    "rememberMe":  false,
+    "verifyEmail":  false,
+    "loginWithEmailAllowed":  true,
+    "duplicateEmailsAllowed":  false,
+    "resetPasswordAllowed":  false,
+    "editUsernameAllowed":  false,
+    "bruteForceProtected":  false,
+    "permanentLockout":  false,
+    "maxTemporaryLockouts":  0,
+    "bruteForceStrategy":  "MULTIPLE",
+    "maxFailureWaitSeconds":  900,
+    "minimumQuickLoginWaitSeconds":  60,
+    "waitIncrementSeconds":  60,
+    "quickLoginCheckMilliSeconds":  1000,
+    "maxDeltaTimeSeconds":  43200,
+    "failureFactor":  30,
+    "roles":  {
+                  "realm":  [
+                                {
+                                    "id":  "72a0b07e-668b-4ce8-90d0-9381e0550a62",
+                                    "name":  "offline_access",
+                                    "description":  "${role_offline-access}",
+                                    "composite":  false,
+                                    "clientRole":  false,
+                                    "containerId":  "598ea8f8-d450-484b-9119-cf2c29b8f0d8",
+                                    "attributes":  {
+
+                                                   }
+                                },
+                                {
+                                    "id":  "5de0df0d-4830-4adf-bd63-ca3e883fbcd9",
+                                    "name":  "uma_authorization",
+                                    "description":  "${role_uma_authorization}",
+                                    "composite":  false,
+                                    "clientRole":  false,
+                                    "containerId":  "598ea8f8-d450-484b-9119-cf2c29b8f0d8",
+                                    "attributes":  {
+
+                                                   }
+                                },
+                                {
+                                    "id":  "06e808ea-8fbd-4ee0-aaea-441ca8f80a41",
+                                    "name":  "ADMIN",
+                                    "description":  "",
+                                    "composite":  false,
+                                    "clientRole":  false,
+                                    "containerId":  "598ea8f8-d450-484b-9119-cf2c29b8f0d8",
+                                    "attributes":  {
+
+                                                   }
+                                },
+                                {
+                                    "id":  "3f56b8b9-5bce-452c-b18c-b2d72c7c37ce",
+                                    "name":  "USER",
+                                    "description":  "",
+                                    "composite":  false,
+                                    "clientRole":  false,
+                                    "containerId":  "598ea8f8-d450-484b-9119-cf2c29b8f0d8",
+                                    "attributes":  {
+
+                                                   }
+                                },
+                                {
+                                    "id":  "00cff8ed-0e92-4a3d-a162-3a44578d3afa",
+                                    "name":  "default-roles-cofrinhos",
+                                    "description":  "${role_default-roles}",
+                                    "composite":  true,
+                                    "composites":  {
+                                                       "realm":  [
+                                                                     "offline_access",
+                                                                     "uma_authorization"
+                                                                 ],
+                                                       "client":  {
+                                                                      "account":  [
+                                                                                      "manage-account",
+                                                                                      "view-profile"
+                                                                                  ]
+                                                                  }
+                                                   },
+                                    "clientRole":  false,
+                                    "containerId":  "598ea8f8-d450-484b-9119-cf2c29b8f0d8",
+                                    "attributes":  {
+
+                                                   }
+                                }
+                            ],
+                  "client":  {
+                                 "realm-management":  [
+                                                          {
+                                                              "id":  "c0daea0c-2ca3-44f1-83b0-178402b5bf04",
+                                                              "name":  "manage-realm",
+                                                              "description":  "${role_manage-realm}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "d9aac766-c3f3-40de-b580-1cd2cd626fe0",
+                                                              "name":  "realm-admin",
+                                                              "description":  "${role_realm-admin}",
+                                                              "composite":  true,
+                                                              "composites":  {
+                                                                                 "client":  {
+                                                                                                "realm-management":  [
+                                                                                                                         "manage-realm",
+                                                                                                                         "manage-authorization",
+                                                                                                                         "view-users",
+                                                                                                                         "manage-clients",
+                                                                                                                         "query-realms",
+                                                                                                                         "query-users",
+                                                                                                                         "impersonation",
+                                                                                                                         "query-clients",
+                                                                                                                         "view-authorization",
+                                                                                                                         "manage-users",
+                                                                                                                         "query-groups",
+                                                                                                                         "view-clients",
+                                                                                                                         "view-events",
+                                                                                                                         "view-identity-providers",
+                                                                                                                         "create-client",
+                                                                                                                         "view-realm",
+                                                                                                                         "manage-identity-providers",
+                                                                                                                         "manage-events"
+                                                                                                                     ]
+                                                                                            }
+                                                                             },
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "95c88c76-4c2f-432c-9013-6de62f66b0ae",
+                                                              "name":  "manage-authorization",
+                                                              "description":  "${role_manage-authorization}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "427f9239-ff1c-4537-a124-72c5f82ae280",
+                                                              "name":  "view-users",
+                                                              "description":  "${role_view-users}",
+                                                              "composite":  true,
+                                                              "composites":  {
+                                                                                 "client":  {
+                                                                                                "realm-management":  [
+                                                                                                                         "query-users",
+                                                                                                                         "query-groups"
+                                                                                                                     ]
+                                                                                            }
+                                                                             },
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "41ca8736-5e77-4594-a2b0-c704076edd44",
+                                                              "name":  "manage-clients",
+                                                              "description":  "${role_manage-clients}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "ed8cd281-86d6-4479-91df-8e50f9189d8b",
+                                                              "name":  "query-realms",
+                                                              "description":  "${role_query-realms}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "72ec1cb6-5278-4951-8849-a0334177aace",
+                                                              "name":  "query-users",
+                                                              "description":  "${role_query-users}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "00188592-e4cb-499a-b3cd-b9954819f86d",
+                                                              "name":  "impersonation",
+                                                              "description":  "${role_impersonation}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "006b4f67-1985-455f-8b9c-b842d96b23ff",
+                                                              "name":  "query-clients",
+                                                              "description":  "${role_query-clients}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "414079dd-2f47-4027-8456-80c0a3f4cedd",
+                                                              "name":  "view-authorization",
+                                                              "description":  "${role_view-authorization}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "60853e86-0f47-4476-a86f-a08951c5b11e",
+                                                              "name":  "manage-users",
+                                                              "description":  "${role_manage-users}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "f0842151-1a05-4324-8d09-50c545305d88",
+                                                              "name":  "query-groups",
+                                                              "description":  "${role_query-groups}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "292cc55b-50de-480b-b45d-c1ce69907aa5",
+                                                              "name":  "view-clients",
+                                                              "description":  "${role_view-clients}",
+                                                              "composite":  true,
+                                                              "composites":  {
+                                                                                 "client":  {
+                                                                                                "realm-management":  [
+                                                                                                                         "query-clients"
+                                                                                                                     ]
+                                                                                            }
+                                                                             },
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "8349617f-f98e-4d1d-90d3-0be7f94eaced",
+                                                              "name":  "view-events",
+                                                              "description":  "${role_view-events}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "e2d3c1a4-c58b-4d04-b024-e29574170c10",
+                                                              "name":  "view-identity-providers",
+                                                              "description":  "${role_view-identity-providers}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "e66bb78d-7671-4e22-9b7e-1b2ca106adf2",
+                                                              "name":  "create-client",
+                                                              "description":  "${role_create-client}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "59490a10-7714-421a-82ad-6275bd4e4901",
+                                                              "name":  "view-realm",
+                                                              "description":  "${role_view-realm}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "9d5fc5c8-5270-4653-b1da-741fab805208",
+                                                              "name":  "manage-events",
+                                                              "description":  "${role_manage-events}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          },
+                                                          {
+                                                              "id":  "4dff58ac-0ff7-412e-870b-ebfcb5bb6d0f",
+                                                              "name":  "manage-identity-providers",
+                                                              "description":  "${role_manage-identity-providers}",
+                                                              "composite":  false,
+                                                              "clientRole":  true,
+                                                              "containerId":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                                                              "attributes":  {
+
+                                                                             }
+                                                          }
+                                                      ],
+                                 "cofrinhos-web":  [
+
+                                                   ],
+                                 "security-admin-console":  [
+
+                                                            ],
+                                 "admin-cli":  [
+
+                                               ],
+                                 "account-console":  [
+
+                                                     ],
+                                 "broker":  [
+                                                {
+                                                    "id":  "87e6dff6-6134-42d4-83ed-3eedc3174cbb",
+                                                    "name":  "read-token",
+                                                    "description":  "${role_read-token}",
+                                                    "composite":  false,
+                                                    "clientRole":  true,
+                                                    "containerId":  "fb8fb7cc-6ba7-4406-9eae-a84ec58ee9fe",
+                                                    "attributes":  {
+
+                                                                   }
+                                                }
+                                            ],
+                                 "account":  [
+                                                 {
+                                                     "id":  "1c4e7ae2-aa6a-43f4-a266-43df6e65d26b",
+                                                     "name":  "view-applications",
+                                                     "description":  "${role_view-applications}",
+                                                     "composite":  false,
+                                                     "clientRole":  true,
+                                                     "containerId":  "3def0ca1-2726-4c95-ae30-3814c678de90",
+                                                     "attributes":  {
+
+                                                                    }
+                                                 },
+                                                 {
+                                                     "id":  "c131e2ec-b16d-4f2a-baf4-805378f56877",
+                                                     "name":  "manage-account",
+                                                     "description":  "${role_manage-account}",
+                                                     "composite":  true,
+                                                     "composites":  {
+                                                                        "client":  {
+                                                                                       "account":  [
+                                                                                                       "manage-account-links"
+                                                                                                   ]
+                                                                                   }
+                                                                    },
+                                                     "clientRole":  true,
+                                                     "containerId":  "3def0ca1-2726-4c95-ae30-3814c678de90",
+                                                     "attributes":  {
+
+                                                                    }
+                                                 },
+                                                 {
+                                                     "id":  "2e60686b-3880-4b04-b51f-2a8617d1f599",
+                                                     "name":  "manage-consent",
+                                                     "description":  "${role_manage-consent}",
+                                                     "composite":  true,
+                                                     "composites":  {
+                                                                        "client":  {
+                                                                                       "account":  [
+                                                                                                       "view-consent"
+                                                                                                   ]
+                                                                                   }
+                                                                    },
+                                                     "clientRole":  true,
+                                                     "containerId":  "3def0ca1-2726-4c95-ae30-3814c678de90",
+                                                     "attributes":  {
+
+                                                                    }
+                                                 },
+                                                 {
+                                                     "id":  "014a4170-45be-4f24-ae69-39b4d1f52eaf",
+                                                     "name":  "view-profile",
+                                                     "description":  "${role_view-profile}",
+                                                     "composite":  false,
+                                                     "clientRole":  true,
+                                                     "containerId":  "3def0ca1-2726-4c95-ae30-3814c678de90",
+                                                     "attributes":  {
+
+                                                                    }
+                                                 },
+                                                 {
+                                                     "id":  "09afa8d5-d2d7-4bc5-9635-b17d7bdf5544",
+                                                     "name":  "manage-account-links",
+                                                     "description":  "${role_manage-account-links}",
+                                                     "composite":  false,
+                                                     "clientRole":  true,
+                                                     "containerId":  "3def0ca1-2726-4c95-ae30-3814c678de90",
+                                                     "attributes":  {
+
+                                                                    }
+                                                 },
+                                                 {
+                                                     "id":  "005f7583-8661-4ee7-ab0d-823843cbbf2f",
+                                                     "name":  "delete-account",
+                                                     "description":  "${role_delete-account}",
+                                                     "composite":  false,
+                                                     "clientRole":  true,
+                                                     "containerId":  "3def0ca1-2726-4c95-ae30-3814c678de90",
+                                                     "attributes":  {
+
+                                                                    }
+                                                 },
+                                                 {
+                                                     "id":  "f35d7db5-a9c2-4fb5-ad71-fff05020a78a",
+                                                     "name":  "view-consent",
+                                                     "description":  "${role_view-consent}",
+                                                     "composite":  false,
+                                                     "clientRole":  true,
+                                                     "containerId":  "3def0ca1-2726-4c95-ae30-3814c678de90",
+                                                     "attributes":  {
+
+                                                                    }
+                                                 },
+                                                 {
+                                                     "id":  "c1a73a4e-a99e-4e59-8564-31f1a133019e",
+                                                     "name":  "view-groups",
+                                                     "description":  "${role_view-groups}",
+                                                     "composite":  false,
+                                                     "clientRole":  true,
+                                                     "containerId":  "3def0ca1-2726-4c95-ae30-3814c678de90",
+                                                     "attributes":  {
+
+                                                                    }
+                                                 }
+                                             ]
+                             }
+              },
+    "groups":  [
+
+               ],
+    "defaultRole":  {
+                        "id":  "00cff8ed-0e92-4a3d-a162-3a44578d3afa",
+                        "name":  "default-roles-cofrinhos",
+                        "description":  "${role_default-roles}",
+                        "composite":  true,
+                        "clientRole":  false,
+                        "containerId":  "598ea8f8-d450-484b-9119-cf2c29b8f0d8"
+                    },
+    "requiredCredentials":  [
+                                "password"
+                            ],
+    "otpPolicyType":  "totp",
+    "otpPolicyAlgorithm":  "HmacSHA1",
+    "otpPolicyInitialCounter":  0,
+    "otpPolicyDigits":  6,
+    "otpPolicyLookAheadWindow":  1,
+    "otpPolicyPeriod":  30,
+    "otpPolicyCodeReusable":  false,
+    "otpSupportedApplications":  [
+                                     "totpAppFreeOTPName",
+                                     "totpAppGoogleName",
+                                     "totpAppMicrosoftAuthenticatorName"
+                                 ],
+    "localizationTexts":  {
+
+                          },
+    "webAuthnPolicyRpEntityName":  "keycloak",
+    "webAuthnPolicySignatureAlgorithms":  [
+                                              "ES256",
+                                              "RS256"
+                                          ],
+    "webAuthnPolicyRpId":  "",
+    "webAuthnPolicyAttestationConveyancePreference":  "not specified",
+    "webAuthnPolicyAuthenticatorAttachment":  "not specified",
+    "webAuthnPolicyRequireResidentKey":  "not specified",
+    "webAuthnPolicyUserVerificationRequirement":  "not specified",
+    "webAuthnPolicyCreateTimeout":  0,
+    "webAuthnPolicyAvoidSameAuthenticatorRegister":  false,
+    "webAuthnPolicyAcceptableAaguids":  [
+
+                                        ],
+    "webAuthnPolicyExtraOrigins":  [
+
+                                   ],
+    "webAuthnPolicyPasswordlessRpEntityName":  "keycloak",
+    "webAuthnPolicyPasswordlessSignatureAlgorithms":  [
+                                                          "ES256",
+                                                          "RS256"
+                                                      ],
+    "webAuthnPolicyPasswordlessRpId":  "",
+    "webAuthnPolicyPasswordlessAttestationConveyancePreference":  "not specified",
+    "webAuthnPolicyPasswordlessAuthenticatorAttachment":  "not specified",
+    "webAuthnPolicyPasswordlessRequireResidentKey":  "not specified",
+    "webAuthnPolicyPasswordlessUserVerificationRequirement":  "not specified",
+    "webAuthnPolicyPasswordlessCreateTimeout":  0,
+    "webAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister":  false,
+    "webAuthnPolicyPasswordlessAcceptableAaguids":  [
+
+                                                    ],
+    "webAuthnPolicyPasswordlessExtraOrigins":  [
+
+                                               ],
+    "users":  [
+                  {
+                      "id":  "c72842d7-e3f4-476b-8f14-bbeae30e5029",
+                      "username":  "enzo",
+                      "firstName":  "Enzo",
+                      "lastName":  "anthony",
+                      "email":  "enzo@cofrinhos.local",
+                      "emailVerified":  true,
+                      "createdTimestamp":  1791633387537,
+                      "enabled":  true,
+                      "totp":  false,
+                      "credentials":  [
+                                          {
+                                              "id":  "0eef09a3-f303-484b-aac2-fc7c2fae2b40",
+                                              "type":  "password",
+                                              "userLabel":  "My password",
+                                              "createdDate":  1791633405946,
+                                              "secretData":  "{\"value\":\"A4Ft91nHmIY42rD1mSbf/EMeOuE/LHCDLcvLQNgnSH8=\",\"salt\":\"4ld8oOIQchU3sM+vrTLkyA==\",\"additionalParameters\":{}}",
+                                              "credentialData":  "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+                                          }
+                                      ],
+                      "disableableCredentialTypes":  [
+
+                                                     ],
+                      "requiredActions":  [
+
+                                          ],
+                      "realmRoles":  [
+                                         "USER",
+                                         "default-roles-cofrinhos"
+                                     ],
+                      "notBefore":  0,
+                      "groups":  [
+
+                                 ]
+                  }
+              ],
+    "scopeMappings":  [
+                          {
+                              "clientScope":  "offline_access",
+                              "roles":  [
+                                            "offline_access"
+                                        ]
+                          }
+                      ],
+    "clientScopeMappings":  {
+                                "account":  [
+                                                {
+                                                    "client":  "account-console",
+                                                    "roles":  [
+                                                                  "manage-account",
+                                                                  "view-groups"
+                                                              ]
+                                                }
+                                            ]
+                            },
+    "clients":  [
+                    {
+                        "id":  "3def0ca1-2726-4c95-ae30-3814c678de90",
+                        "clientId":  "account",
+                        "name":  "${client_account}",
+                        "rootUrl":  "${authBaseUrl}",
+                        "baseUrl":  "/realms/cofrinhos/account/",
+                        "surrogateAuthRequired":  false,
+                        "enabled":  true,
+                        "alwaysDisplayInConsole":  false,
+                        "clientAuthenticatorType":  "client-secret",
+                        "redirectUris":  [
+                                             "/realms/cofrinhos/account/*"
+                                         ],
+                        "webOrigins":  [
+
+                                       ],
+                        "notBefore":  0,
+                        "bearerOnly":  false,
+                        "consentRequired":  false,
+                        "standardFlowEnabled":  true,
+                        "implicitFlowEnabled":  false,
+                        "directAccessGrantsEnabled":  false,
+                        "serviceAccountsEnabled":  false,
+                        "publicClient":  true,
+                        "frontchannelLogout":  false,
+                        "protocol":  "openid-connect",
+                        "attributes":  {
+                                           "realm_client":  "false",
+                                           "post.logout.redirect.uris":  "+"
+                                       },
+                        "authenticationFlowBindingOverrides":  {
+
+                                                               },
+                        "fullScopeAllowed":  false,
+                        "nodeReRegistrationTimeout":  0,
+                        "defaultClientScopes":  [
+                                                    "web-origins",
+                                                    "acr",
+                                                    "profile",
+                                                    "roles",
+                                                    "basic",
+                                                    "email"
+                                                ],
+                        "optionalClientScopes":  [
+                                                     "address",
+                                                     "phone",
+                                                     "offline_access",
+                                                     "organization",
+                                                     "microprofile-jwt"
+                                                 ]
+                    },
+                    {
+                        "id":  "33dcfaaa-07d1-44e2-9653-e28a58c7b227",
+                        "clientId":  "account-console",
+                        "name":  "${client_account-console}",
+                        "rootUrl":  "${authBaseUrl}",
+                        "baseUrl":  "/realms/cofrinhos/account/",
+                        "surrogateAuthRequired":  false,
+                        "enabled":  true,
+                        "alwaysDisplayInConsole":  false,
+                        "clientAuthenticatorType":  "client-secret",
+                        "redirectUris":  [
+                                             "/realms/cofrinhos/account/*"
+                                         ],
+                        "webOrigins":  [
+
+                                       ],
+                        "notBefore":  0,
+                        "bearerOnly":  false,
+                        "consentRequired":  false,
+                        "standardFlowEnabled":  true,
+                        "implicitFlowEnabled":  false,
+                        "directAccessGrantsEnabled":  false,
+                        "serviceAccountsEnabled":  false,
+                        "publicClient":  true,
+                        "frontchannelLogout":  false,
+                        "protocol":  "openid-connect",
+                        "attributes":  {
+                                           "realm_client":  "false",
+                                           "post.logout.redirect.uris":  "+",
+                                           "pkce.code.challenge.method":  "S256"
+                                       },
+                        "authenticationFlowBindingOverrides":  {
+
+                                                               },
+                        "fullScopeAllowed":  false,
+                        "nodeReRegistrationTimeout":  0,
+                        "protocolMappers":  [
+                                                {
+                                                    "id":  "0645c643-c6c4-4ee6-a822-0567c71e36af",
+                                                    "name":  "audience resolve",
+                                                    "protocol":  "openid-connect",
+                                                    "protocolMapper":  "oidc-audience-resolve-mapper",
+                                                    "consentRequired":  false,
+                                                    "config":  {
+
+                                                               }
+                                                }
+                                            ],
+                        "defaultClientScopes":  [
+                                                    "web-origins",
+                                                    "acr",
+                                                    "profile",
+                                                    "roles",
+                                                    "basic",
+                                                    "email"
+                                                ],
+                        "optionalClientScopes":  [
+                                                     "address",
+                                                     "phone",
+                                                     "offline_access",
+                                                     "organization",
+                                                     "microprofile-jwt"
+                                                 ]
+                    },
+                    {
+                        "id":  "e4a87a64-b3f2-46ea-8086-fa1298ad6006",
+                        "clientId":  "admin-cli",
+                        "name":  "${client_admin-cli}",
+                        "surrogateAuthRequired":  false,
+                        "enabled":  true,
+                        "alwaysDisplayInConsole":  false,
+                        "clientAuthenticatorType":  "client-secret",
+                        "redirectUris":  [
+
+                                         ],
+                        "webOrigins":  [
+
+                                       ],
+                        "notBefore":  0,
+                        "bearerOnly":  false,
+                        "consentRequired":  false,
+                        "standardFlowEnabled":  false,
+                        "implicitFlowEnabled":  false,
+                        "directAccessGrantsEnabled":  true,
+                        "serviceAccountsEnabled":  false,
+                        "publicClient":  true,
+                        "frontchannelLogout":  false,
+                        "protocol":  "openid-connect",
+                        "attributes":  {
+                                           "realm_client":  "false",
+                                           "client.use.lightweight.access.token.enabled":  "true"
+                                       },
+                        "authenticationFlowBindingOverrides":  {
+
+                                                               },
+                        "fullScopeAllowed":  true,
+                        "nodeReRegistrationTimeout":  0,
+                        "defaultClientScopes":  [
+                                                    "web-origins",
+                                                    "acr",
+                                                    "profile",
+                                                    "roles",
+                                                    "basic",
+                                                    "email"
+                                                ],
+                        "optionalClientScopes":  [
+                                                     "address",
+                                                     "phone",
+                                                     "offline_access",
+                                                     "organization",
+                                                     "microprofile-jwt"
+                                                 ]
+                    },
+                    {
+                        "id":  "fb8fb7cc-6ba7-4406-9eae-a84ec58ee9fe",
+                        "clientId":  "broker",
+                        "name":  "${client_broker}",
+                        "surrogateAuthRequired":  false,
+                        "enabled":  true,
+                        "alwaysDisplayInConsole":  false,
+                        "clientAuthenticatorType":  "client-secret",
+                        "redirectUris":  [
+
+                                         ],
+                        "webOrigins":  [
+
+                                       ],
+                        "notBefore":  0,
+                        "bearerOnly":  true,
+                        "consentRequired":  false,
+                        "standardFlowEnabled":  true,
+                        "implicitFlowEnabled":  false,
+                        "directAccessGrantsEnabled":  false,
+                        "serviceAccountsEnabled":  false,
+                        "publicClient":  false,
+                        "frontchannelLogout":  false,
+                        "protocol":  "openid-connect",
+                        "attributes":  {
+                                           "realm_client":  "true"
+                                       },
+                        "authenticationFlowBindingOverrides":  {
+
+                                                               },
+                        "fullScopeAllowed":  false,
+                        "nodeReRegistrationTimeout":  0,
+                        "defaultClientScopes":  [
+                                                    "web-origins",
+                                                    "acr",
+                                                    "profile",
+                                                    "roles",
+                                                    "basic",
+                                                    "email"
+                                                ],
+                        "optionalClientScopes":  [
+                                                     "address",
+                                                     "phone",
+                                                     "offline_access",
+                                                     "organization",
+                                                     "microprofile-jwt"
+                                                 ]
+                    },
+                    {
+                        "id":  "c68099a0-1829-4a53-b4bf-4318a086d91d",
+                        "clientId":  "cofrinhos-web",
+                        "name":  "",
+                        "description":  "",
+                        "rootUrl":  "",
+                        "adminUrl":  "",
+                        "baseUrl":  "",
+                        "surrogateAuthRequired":  false,
+                        "enabled":  true,
+                        "alwaysDisplayInConsole":  false,
+                        "clientAuthenticatorType":  "client-secret",
+                        "redirectUris":  [
+                                             "http://localhost:5500/*"
+                                         ],
+                        "webOrigins":  [
+                                           "http://localhost:5500"
+                                       ],
+                        "notBefore":  0,
+                        "bearerOnly":  false,
+                        "consentRequired":  false,
+                        "standardFlowEnabled":  true,
+                        "implicitFlowEnabled":  false,
+                        "directAccessGrantsEnabled":  true,
+                        "serviceAccountsEnabled":  false,
+                        "publicClient":  true,
+                        "frontchannelLogout":  true,
+                        "protocol":  "openid-connect",
+                        "attributes":  {
+                                           "realm_client":  "false",
+                                           "oidc.ciba.grant.enabled":  "false",
+                                           "backchannel.logout.session.required":  "true",
+                                           "oauth2.device.authorization.grant.enabled":  "false",
+                                           "backchannel.logout.revoke.offline.tokens":  "false"
+                                       },
+                        "authenticationFlowBindingOverrides":  {
+
+                                                               },
+                        "fullScopeAllowed":  true,
+                        "nodeReRegistrationTimeout":  -1,
+                        "protocolMappers":  [
+                                                {
+                                                    "id":  "0bd8a056-5cb6-4903-8f4e-e8e41011aea7",
+                                                    "name":  "audience-cofrinhos-api",
+                                                    "protocol":  "openid-connect",
+                                                    "protocolMapper":  "oidc-audience-mapper",
+                                                    "consentRequired":  false,
+                                                    "config":  {
+                                                                   "id.token.claim":  "false",
+                                                                   "lightweight.claim":  "false",
+                                                                   "access.token.claim":  "true",
+                                                                   "introspection.token.claim":  "true",
+                                                                   "included.custom.audience":  "cofrinhos-api"
+                                                               }
+                                                }
+                                            ],
+                        "defaultClientScopes":  [
+                                                    "web-origins",
+                                                    "acr",
+                                                    "profile",
+                                                    "roles",
+                                                    "basic",
+                                                    "email"
+                                                ],
+                        "optionalClientScopes":  [
+                                                     "address",
+                                                     "phone",
+                                                     "offline_access",
+                                                     "organization",
+                                                     "microprofile-jwt"
+                                                 ]
+                    },
+                    {
+                        "id":  "32ceea2d-ee79-4695-97dd-6b5f1ae0bc63",
+                        "clientId":  "realm-management",
+                        "name":  "${client_realm-management}",
+                        "surrogateAuthRequired":  false,
+                        "enabled":  true,
+                        "alwaysDisplayInConsole":  false,
+                        "clientAuthenticatorType":  "client-secret",
+                        "redirectUris":  [
+
+                                         ],
+                        "webOrigins":  [
+
+                                       ],
+                        "notBefore":  0,
+                        "bearerOnly":  true,
+                        "consentRequired":  false,
+                        "standardFlowEnabled":  true,
+                        "implicitFlowEnabled":  false,
+                        "directAccessGrantsEnabled":  false,
+                        "serviceAccountsEnabled":  false,
+                        "publicClient":  false,
+                        "frontchannelLogout":  false,
+                        "protocol":  "openid-connect",
+                        "attributes":  {
+                                           "realm_client":  "true"
+                                       },
+                        "authenticationFlowBindingOverrides":  {
+
+                                                               },
+                        "fullScopeAllowed":  false,
+                        "nodeReRegistrationTimeout":  0,
+                        "defaultClientScopes":  [
+                                                    "web-origins",
+                                                    "acr",
+                                                    "profile",
+                                                    "roles",
+                                                    "basic",
+                                                    "email"
+                                                ],
+                        "optionalClientScopes":  [
+                                                     "address",
+                                                     "phone",
+                                                     "offline_access",
+                                                     "organization",
+                                                     "microprofile-jwt"
+                                                 ]
+                    },
+                    {
+                        "id":  "e55a0a14-8e55-4ace-ac85-62d8196ada16",
+                        "clientId":  "security-admin-console",
+                        "name":  "${client_security-admin-console}",
+                        "rootUrl":  "${authAdminUrl}",
+                        "baseUrl":  "/admin/cofrinhos/console/",
+                        "surrogateAuthRequired":  false,
+                        "enabled":  true,
+                        "alwaysDisplayInConsole":  false,
+                        "clientAuthenticatorType":  "client-secret",
+                        "redirectUris":  [
+                                             "/admin/cofrinhos/console/*"
+                                         ],
+                        "webOrigins":  [
+                                           "+"
+                                       ],
+                        "notBefore":  0,
+                        "bearerOnly":  false,
+                        "consentRequired":  false,
+                        "standardFlowEnabled":  true,
+                        "implicitFlowEnabled":  false,
+                        "directAccessGrantsEnabled":  false,
+                        "serviceAccountsEnabled":  false,
+                        "publicClient":  true,
+                        "frontchannelLogout":  false,
+                        "protocol":  "openid-connect",
+                        "attributes":  {
+                                           "realm_client":  "false",
+                                           "client.use.lightweight.access.token.enabled":  "true",
+                                           "post.logout.redirect.uris":  "+",
+                                           "pkce.code.challenge.method":  "S256"
+                                       },
+                        "authenticationFlowBindingOverrides":  {
+
+                                                               },
+                        "fullScopeAllowed":  true,
+                        "nodeReRegistrationTimeout":  0,
+                        "protocolMappers":  [
+                                                {
+                                                    "id":  "1dedca15-5de9-4435-8335-f41564120fc3",
+                                                    "name":  "locale",
+                                                    "protocol":  "openid-connect",
+                                                    "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                    "consentRequired":  false,
+                                                    "config":  {
+                                                                   "introspection.token.claim":  "true",
+                                                                   "userinfo.token.claim":  "true",
+                                                                   "user.attribute":  "locale",
+                                                                   "id.token.claim":  "true",
+                                                                   "access.token.claim":  "true",
+                                                                   "claim.name":  "locale",
+                                                                   "jsonType.label":  "String"
+                                                               }
+                                                }
+                                            ],
+                        "defaultClientScopes":  [
+                                                    "web-origins",
+                                                    "acr",
+                                                    "profile",
+                                                    "roles",
+                                                    "basic",
+                                                    "email"
+                                                ],
+                        "optionalClientScopes":  [
+                                                     "address",
+                                                     "phone",
+                                                     "offline_access",
+                                                     "organization",
+                                                     "microprofile-jwt"
+                                                 ]
+                    }
+                ],
+    "clientScopes":  [
+                         {
+                             "id":  "1e1f3120-a283-4170-ba78-b2559e449643",
+                             "name":  "email",
+                             "description":  "OpenID Connect built-in scope: email",
+                             "protocol":  "openid-connect",
+                             "attributes":  {
+                                                "include.in.token.scope":  "true",
+                                                "consent.screen.text":  "${emailScopeConsentText}",
+                                                "display.on.consent.screen":  "true"
+                                            },
+                             "protocolMappers":  [
+                                                     {
+                                                         "id":  "0b462fdb-1725-4035-a61a-ee6fbbb07c44",
+                                                         "name":  "email verified",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-property-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "emailVerified",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "email_verified",
+                                                                        "jsonType.label":  "boolean"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "555b897e-3b4a-43af-a9bd-d412ab98e401",
+                                                         "name":  "email",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "email",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "email",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     }
+                                                 ]
+                         },
+                         {
+                             "id":  "2088ba1a-1568-4265-9cb0-1ee7f1bf2ad2",
+                             "name":  "role_list",
+                             "description":  "SAML role list",
+                             "protocol":  "saml",
+                             "attributes":  {
+                                                "consent.screen.text":  "${samlRoleListScopeConsentText}",
+                                                "display.on.consent.screen":  "true"
+                                            },
+                             "protocolMappers":  [
+                                                     {
+                                                         "id":  "291c9354-3188-467d-8fd1-41d1838d4b8b",
+                                                         "name":  "role list",
+                                                         "protocol":  "saml",
+                                                         "protocolMapper":  "saml-role-list-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "single":  "false",
+                                                                        "attribute.nameformat":  "Basic",
+                                                                        "attribute.name":  "Role"
+                                                                    }
+                                                     }
+                                                 ]
+                         },
+                         {
+                             "id":  "63bfbbe5-8a03-419e-8644-8744b071633d",
+                             "name":  "web-origins",
+                             "description":  "OpenID Connect scope for add allowed web origins to the access token",
+                             "protocol":  "openid-connect",
+                             "attributes":  {
+                                                "include.in.token.scope":  "false",
+                                                "consent.screen.text":  "",
+                                                "display.on.consent.screen":  "false"
+                                            },
+                             "protocolMappers":  [
+                                                     {
+                                                         "id":  "86188e1f-5b47-4af1-9fe1-f908754c0321",
+                                                         "name":  "allowed web origins",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-allowed-origins-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "access.token.claim":  "true"
+                                                                    }
+                                                     }
+                                                 ]
+                         },
+                         {
+                             "id":  "29959ed6-75bd-451a-8989-3a0db3ae4075",
+                             "name":  "offline_access",
+                             "description":  "OpenID Connect built-in scope: offline_access",
+                             "protocol":  "openid-connect",
+                             "attributes":  {
+                                                "consent.screen.text":  "${offlineAccessScopeConsentText}",
+                                                "display.on.consent.screen":  "true"
+                                            }
+                         },
+                         {
+                             "id":  "6a84a211-f852-4737-b575-f92be5a5b075",
+                             "name":  "address",
+                             "description":  "OpenID Connect built-in scope: address",
+                             "protocol":  "openid-connect",
+                             "attributes":  {
+                                                "include.in.token.scope":  "true",
+                                                "consent.screen.text":  "${addressScopeConsentText}",
+                                                "display.on.consent.screen":  "true"
+                                            },
+                             "protocolMappers":  [
+                                                     {
+                                                         "id":  "3e875cfb-d9f7-4e6e-b11c-e63a44b12e51",
+                                                         "name":  "address",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-address-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "user.attribute.formatted":  "formatted",
+                                                                        "user.attribute.country":  "country",
+                                                                        "introspection.token.claim":  "true",
+                                                                        "user.attribute.postal_code":  "postal_code",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute.street":  "street",
+                                                                        "id.token.claim":  "true",
+                                                                        "user.attribute.region":  "region",
+                                                                        "access.token.claim":  "true",
+                                                                        "user.attribute.locality":  "locality"
+                                                                    }
+                                                     }
+                                                 ]
+                         },
+                         {
+                             "id":  "a371d9ff-7f13-4fee-93c3-4590d8fbcf55",
+                             "name":  "microprofile-jwt",
+                             "description":  "Microprofile - JWT built-in scope",
+                             "protocol":  "openid-connect",
+                             "attributes":  {
+                                                "include.in.token.scope":  "true",
+                                                "display.on.consent.screen":  "false"
+                                            },
+                             "protocolMappers":  [
+                                                     {
+                                                         "id":  "27ae3596-2493-4046-b07a-d11543ea9a49",
+                                                         "name":  "upn",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "username",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "upn",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "77c44318-5c67-476d-9b40-6c8d29004ca4",
+                                                         "name":  "groups",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-realm-role-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "multivalued":  "true",
+                                                                        "user.attribute":  "foo",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "groups",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     }
+                                                 ]
+                         },
+                         {
+                             "id":  "e8988316-5030-443a-b76a-b0220003e6be",
+                             "name":  "organization",
+                             "description":  "Additional claims about the organization a subject belongs to",
+                             "protocol":  "openid-connect",
+                             "attributes":  {
+                                                "include.in.token.scope":  "true",
+                                                "consent.screen.text":  "${organizationScopeConsentText}",
+                                                "display.on.consent.screen":  "true"
+                                            },
+                             "protocolMappers":  [
+                                                     {
+                                                         "id":  "c1fa22aa-fe9d-457e-8637-792a6c2b1d9b",
+                                                         "name":  "organization",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-organization-membership-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "id.token.claim":  "true",
+                                                                        "introspection.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "organization",
+                                                                        "jsonType.label":  "String",
+                                                                        "multivalued":  "true"
+                                                                    }
+                                                     }
+                                                 ]
+                         },
+                         {
+                             "id":  "b7d81109-103b-4442-8e30-677fc11b7afc",
+                             "name":  "basic",
+                             "description":  "OpenID Connect scope for add all basic claims to the token",
+                             "protocol":  "openid-connect",
+                             "attributes":  {
+                                                "include.in.token.scope":  "false",
+                                                "display.on.consent.screen":  "false"
+                                            },
+                             "protocolMappers":  [
+                                                     {
+                                                         "id":  "751c0f7a-fe79-4d03-9118-318dc9abcd22",
+                                                         "name":  "sub",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-sub-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "access.token.claim":  "true"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "68383648-35b0-4e75-b08d-39401c59a16b",
+                                                         "name":  "auth_time",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usersessionmodel-note-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "user.session.note":  "AUTH_TIME",
+                                                                        "id.token.claim":  "true",
+                                                                        "introspection.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "auth_time",
+                                                                        "jsonType.label":  "long"
+                                                                    }
+                                                     }
+                                                 ]
+                         },
+                         {
+                             "id":  "d7340513-5ca7-447a-a91e-52ecf50b3e1f",
+                             "name":  "phone",
+                             "description":  "OpenID Connect built-in scope: phone",
+                             "protocol":  "openid-connect",
+                             "attributes":  {
+                                                "include.in.token.scope":  "true",
+                                                "consent.screen.text":  "${phoneScopeConsentText}",
+                                                "display.on.consent.screen":  "true"
+                                            },
+                             "protocolMappers":  [
+                                                     {
+                                                         "id":  "891c36c6-537d-4708-a458-d317d0a8c53e",
+                                                         "name":  "phone number",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "phoneNumber",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "phone_number",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "1f97e9e9-fd72-47e5-b546-4e981258a904",
+                                                         "name":  "phone number verified",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "phoneNumberVerified",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "phone_number_verified",
+                                                                        "jsonType.label":  "boolean"
+                                                                    }
+                                                     }
+                                                 ]
+                         },
+                         {
+                             "id":  "141b5bc5-c181-4cf1-abc8-b6379e26be69",
+                             "name":  "saml_organization",
+                             "description":  "Organization Membership",
+                             "protocol":  "saml",
+                             "attributes":  {
+                                                "display.on.consent.screen":  "false"
+                                            },
+                             "protocolMappers":  [
+                                                     {
+                                                         "id":  "262a4505-995b-4e5f-b880-25a923e43956",
+                                                         "name":  "organization",
+                                                         "protocol":  "saml",
+                                                         "protocolMapper":  "saml-organization-membership-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+
+                                                                    }
+                                                     }
+                                                 ]
+                         },
+                         {
+                             "id":  "023b5696-caa4-4dab-87ae-c9e623ac1f01",
+                             "name":  "profile",
+                             "description":  "OpenID Connect built-in scope: profile",
+                             "protocol":  "openid-connect",
+                             "attributes":  {
+                                                "include.in.token.scope":  "true",
+                                                "consent.screen.text":  "${profileScopeConsentText}",
+                                                "display.on.consent.screen":  "true"
+                                            },
+                             "protocolMappers":  [
+                                                     {
+                                                         "id":  "d4b92f34-a578-40ff-abfd-569f5167888d",
+                                                         "name":  "username",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "username",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "preferred_username",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "face6e4c-cb1b-4e9a-9fe6-3f517d38dd12",
+                                                         "name":  "nickname",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "nickname",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "nickname",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "2af5e176-1eaf-4941-931e-ec2812ebc411",
+                                                         "name":  "updated at",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "updatedAt",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "updated_at",
+                                                                        "jsonType.label":  "long"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "fd532d81-efaa-437e-b80a-7ac131121de6",
+                                                         "name":  "given name",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "firstName",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "given_name",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "3b0255f1-36c8-469e-8d38-f661c56ef36c",
+                                                         "name":  "profile",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "profile",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "profile",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "31e513a2-b01f-42d1-9795-f4167606bae0",
+                                                         "name":  "family name",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "lastName",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "family_name",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "496e9938-f342-47fd-a2a7-d5d9a94d7b08",
+                                                         "name":  "gender",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "gender",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "gender",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "4c47efc6-37a6-45e2-9e5b-d23a1ab91061",
+                                                         "name":  "picture",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "picture",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "picture",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "561bcad6-196d-4f52-8a0a-b51ebe0c236b",
+                                                         "name":  "locale",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "locale",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "locale",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "ea866134-a07f-4159-858c-76ff6d8fc78f",
+                                                         "name":  "middle name",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "middleName",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "middle_name",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "a8274378-94b4-42fe-979b-c76874ea1e79",
+                                                         "name":  "website",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "website",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "website",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "69d9c311-af4a-499d-bc3a-710124666dc3",
+                                                         "name":  "birthdate",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "birthdate",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "birthdate",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "62d1e884-9a31-4c4b-9fca-ed827b5d070c",
+                                                         "name":  "full name",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-full-name-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "id.token.claim":  "true",
+                                                                        "introspection.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "89ac4463-840c-4d61-8e11-87cc2b6c8dae",
+                                                         "name":  "zoneinfo",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-attribute-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "userinfo.token.claim":  "true",
+                                                                        "user.attribute":  "zoneinfo",
+                                                                        "id.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "zoneinfo",
+                                                                        "jsonType.label":  "String"
+                                                                    }
+                                                     }
+                                                 ]
+                         },
+                         {
+                             "id":  "0c6c37ca-996e-43c4-a318-4806cf349d03",
+                             "name":  "acr",
+                             "description":  "OpenID Connect scope for add acr (authentication context class reference) to the token",
+                             "protocol":  "openid-connect",
+                             "attributes":  {
+                                                "include.in.token.scope":  "false",
+                                                "display.on.consent.screen":  "false"
+                                            },
+                             "protocolMappers":  [
+                                                     {
+                                                         "id":  "cfd5d5d1-dc49-4f45-91d9-cdf46cdcf076",
+                                                         "name":  "acr loa level",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-acr-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "id.token.claim":  "true",
+                                                                        "introspection.token.claim":  "true",
+                                                                        "access.token.claim":  "true"
+                                                                    }
+                                                     }
+                                                 ]
+                         },
+                         {
+                             "id":  "2713a3ca-bcbe-4b17-b02e-0aacc7436482",
+                             "name":  "roles",
+                             "description":  "OpenID Connect scope for add user roles to the access token",
+                             "protocol":  "openid-connect",
+                             "attributes":  {
+                                                "include.in.token.scope":  "false",
+                                                "consent.screen.text":  "${rolesScopeConsentText}",
+                                                "display.on.consent.screen":  "true"
+                                            },
+                             "protocolMappers":  [
+                                                     {
+                                                         "id":  "e7791c9f-3436-4fbf-b97f-7d99e844f5a5",
+                                                         "name":  "client roles",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-client-role-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "user.attribute":  "foo",
+                                                                        "introspection.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "resource_access.${client_id}.roles",
+                                                                        "jsonType.label":  "String",
+                                                                        "multivalued":  "true"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "f91b851e-08f6-45c3-957f-14cf13bbcdc5",
+                                                         "name":  "realm roles",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-usermodel-realm-role-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "user.attribute":  "foo",
+                                                                        "introspection.token.claim":  "true",
+                                                                        "access.token.claim":  "true",
+                                                                        "claim.name":  "realm_access.roles",
+                                                                        "jsonType.label":  "String",
+                                                                        "multivalued":  "true"
+                                                                    }
+                                                     },
+                                                     {
+                                                         "id":  "a3fc0513-d2af-4530-b3ac-c3b7c712c72b",
+                                                         "name":  "audience resolve",
+                                                         "protocol":  "openid-connect",
+                                                         "protocolMapper":  "oidc-audience-resolve-mapper",
+                                                         "consentRequired":  false,
+                                                         "config":  {
+                                                                        "introspection.token.claim":  "true",
+                                                                        "access.token.claim":  "true"
+                                                                    }
+                                                     }
+                                                 ]
+                         }
+                     ],
+    "defaultDefaultClientScopes":  [
+                                       "role_list",
+                                       "saml_organization",
+                                       "profile",
+                                       "email",
+                                       "roles",
+                                       "web-origins",
+                                       "acr",
+                                       "basic"
+                                   ],
+    "defaultOptionalClientScopes":  [
+                                        "offline_access",
+                                        "address",
+                                        "phone",
+                                        "microprofile-jwt",
+                                        "organization"
+                                    ],
+    "browserSecurityHeaders":  {
+                                   "contentSecurityPolicyReportOnly":  "",
+                                   "xContentTypeOptions":  "nosniff",
+                                   "referrerPolicy":  "no-referrer",
+                                   "xRobotsTag":  "none",
+                                   "xFrameOptions":  "SAMEORIGIN",
+                                   "contentSecurityPolicy":  "frame-src \u0027self\u0027; frame-ancestors \u0027self\u0027; object-src \u0027none\u0027;",
+                                   "xXSSProtection":  "1; mode=block",
+                                   "strictTransportSecurity":  "max-age=31536000; includeSubDomains"
+                               },
+    "smtpServer":  {
+
+                   },
+    "eventsEnabled":  false,
+    "eventsListeners":  [
+                            "jboss-logging"
+                        ],
+    "enabledEventTypes":  [
+
+                          ],
+    "adminEventsEnabled":  false,
+    "adminEventsDetailsEnabled":  false,
+    "identityProviders":  [
+
+                          ],
+    "identityProviderMappers":  [
+
+                                ],
+    "components":  {
+                       "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy":  [
+                                                                                                        {
+                                                                                                            "id":  "eb1e9fdf-cd7d-4a10-89c7-9ae1f62e7398",
+                                                                                                            "name":  "Allowed Client Scopes",
+                                                                                                            "providerId":  "allowed-client-templates",
+                                                                                                            "subType":  "anonymous",
+                                                                                                            "subComponents":  {
+
+                                                                                                                              },
+                                                                                                            "config":  {
+                                                                                                                           "allow-default-scopes":  [
+                                                                                                                                                        "true"
+                                                                                                                                                    ]
+                                                                                                                       }
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "id":  "4f96c16f-e47b-4a30-98fd-0203129df583",
+                                                                                                            "name":  "Consent Required",
+                                                                                                            "providerId":  "consent-required",
+                                                                                                            "subType":  "anonymous",
+                                                                                                            "subComponents":  {
+
+                                                                                                                              },
+                                                                                                            "config":  {
+
+                                                                                                                       }
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "id":  "f840a7c0-abf3-4706-83f4-349be3ad96d7",
+                                                                                                            "name":  "Trusted Hosts",
+                                                                                                            "providerId":  "trusted-hosts",
+                                                                                                            "subType":  "anonymous",
+                                                                                                            "subComponents":  {
+
+                                                                                                                              },
+                                                                                                            "config":  {
+                                                                                                                           "host-sending-registration-request-must-match":  [
+                                                                                                                                                                                "true"
+                                                                                                                                                                            ],
+                                                                                                                           "client-uris-must-match":  [
+                                                                                                                                                          "true"
+                                                                                                                                                      ]
+                                                                                                                       }
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "id":  "9978ffab-70c7-4229-a3eb-b33a499965fd",
+                                                                                                            "name":  "Allowed Protocol Mapper Types",
+                                                                                                            "providerId":  "allowed-protocol-mappers",
+                                                                                                            "subType":  "anonymous",
+                                                                                                            "subComponents":  {
+
+                                                                                                                              },
+                                                                                                            "config":  {
+                                                                                                                           "allowed-protocol-mapper-types":  [
+                                                                                                                                                                 "saml-user-property-mapper",
+                                                                                                                                                                 "oidc-sha256-pairwise-sub-mapper",
+                                                                                                                                                                 "oidc-usermodel-attribute-mapper",
+                                                                                                                                                                 "oidc-usermodel-property-mapper",
+                                                                                                                                                                 "oidc-address-mapper",
+                                                                                                                                                                 "oidc-full-name-mapper",
+                                                                                                                                                                 "saml-role-list-mapper",
+                                                                                                                                                                 "saml-user-attribute-mapper"
+                                                                                                                                                             ]
+                                                                                                                       }
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "id":  "13f425b8-0660-4991-bb1b-6043a3ebc507",
+                                                                                                            "name":  "Allowed Client Scopes",
+                                                                                                            "providerId":  "allowed-client-templates",
+                                                                                                            "subType":  "authenticated",
+                                                                                                            "subComponents":  {
+
+                                                                                                                              },
+                                                                                                            "config":  {
+                                                                                                                           "allow-default-scopes":  [
+                                                                                                                                                        "true"
+                                                                                                                                                    ]
+                                                                                                                       }
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "id":  "226f68cd-238d-4569-bee2-043c346c2a08",
+                                                                                                            "name":  "Full Scope Disabled",
+                                                                                                            "providerId":  "scope",
+                                                                                                            "subType":  "anonymous",
+                                                                                                            "subComponents":  {
+
+                                                                                                                              },
+                                                                                                            "config":  {
+
+                                                                                                                       }
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "id":  "0dea7862-09a6-49d3-a804-136bec02f262",
+                                                                                                            "name":  "Allowed Protocol Mapper Types",
+                                                                                                            "providerId":  "allowed-protocol-mappers",
+                                                                                                            "subType":  "authenticated",
+                                                                                                            "subComponents":  {
+
+                                                                                                                              },
+                                                                                                            "config":  {
+                                                                                                                           "allowed-protocol-mapper-types":  [
+                                                                                                                                                                 "oidc-full-name-mapper",
+                                                                                                                                                                 "saml-role-list-mapper",
+                                                                                                                                                                 "oidc-address-mapper",
+                                                                                                                                                                 "oidc-usermodel-property-mapper",
+                                                                                                                                                                 "oidc-usermodel-attribute-mapper",
+                                                                                                                                                                 "saml-user-property-mapper",
+                                                                                                                                                                 "saml-user-attribute-mapper",
+                                                                                                                                                                 "oidc-sha256-pairwise-sub-mapper"
+                                                                                                                                                             ]
+                                                                                                                       }
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "id":  "404f53c6-1e60-4552-af18-d4f51fe16962",
+                                                                                                            "name":  "Max Clients Limit",
+                                                                                                            "providerId":  "max-clients",
+                                                                                                            "subType":  "anonymous",
+                                                                                                            "subComponents":  {
+
+                                                                                                                              },
+                                                                                                            "config":  {
+                                                                                                                           "max-clients":  [
+                                                                                                                                               "200"
+                                                                                                                                           ]
+                                                                                                                       }
+                                                                                                        }
+                                                                                                    ]
+                   },
+    "internationalizationEnabled":  false,
+    "supportedLocales":  [
+
+                         ],
+    "authenticationFlows":  [
+                                {
+                                    "id":  "ee0b04f2-5272-4b75-800d-ed7f2ba96bac",
+                                    "alias":  "Account verification options",
+                                    "description":  "Method with which to verity the existing account",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  false,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "idp-email-verification",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "ALTERNATIVE",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticatorFlow":  true,
+                                                                         "requirement":  "ALTERNATIVE",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  true,
+                                                                         "flowAlias":  "Verify Existing Account by Re-authentication",
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "5d1c80f7-4444-43d5-833c-d6c86a2dd093",
+                                    "alias":  "Browser - Conditional OTP",
+                                    "description":  "Flow to determine if the OTP is required for the authentication",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  false,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "conditional-user-configured",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "auth-otp-form",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "05b9dff2-e989-4884-935f-80a11b51c06d",
+                                    "alias":  "Browser - Conditional Organization",
+                                    "description":  "Flow to determine if the organization identity-first login is to be used",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  false,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "conditional-user-configured",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "organization",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "ALTERNATIVE",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "cbd50dad-de42-4e81-94b0-5b1736c07533",
+                                    "alias":  "Direct Grant - Conditional OTP",
+                                    "description":  "Flow to determine if the OTP is required for the authentication",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  false,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "conditional-user-configured",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "direct-grant-validate-otp",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "db3ad696-266b-402d-abd9-879b92cd19e5",
+                                    "alias":  "First Broker Login - Conditional Organization",
+                                    "description":  "Flow to determine if the authenticator that adds organization members is to be used",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  false,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "conditional-user-configured",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "idp-add-organization-member",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "9149dbec-15eb-4e23-a3cc-634bb564859b",
+                                    "alias":  "First broker login - Conditional OTP",
+                                    "description":  "Flow to determine if the OTP is required for the authentication",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  false,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "conditional-user-configured",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "auth-otp-form",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "26db6c25-d3c4-4b3e-8dba-17b6ef568492",
+                                    "alias":  "Handle Existing Account",
+                                    "description":  "Handle what to do if there is existing account with same email/username like authenticated identity provider",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  false,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "idp-confirm-link",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticatorFlow":  true,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  true,
+                                                                         "flowAlias":  "Account verification options",
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "a9d98dc4-be07-4c2a-9c28-f63f59b7fc02",
+                                    "alias":  "Organization",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  false,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticatorFlow":  true,
+                                                                         "requirement":  "CONDITIONAL",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  true,
+                                                                         "flowAlias":  "Browser - Conditional Organization",
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "dc4a2af7-2fda-4f72-9249-814745261f53",
+                                    "alias":  "Reset - Conditional OTP",
+                                    "description":  "Flow to determine if the OTP should be reset or not. Set to REQUIRED to force.",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  false,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "conditional-user-configured",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "reset-otp",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "86f721c8-d427-44c6-96e8-6f1f528289c8",
+                                    "alias":  "User creation or linking",
+                                    "description":  "Flow for the existing/non-existing user alternatives",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  false,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticatorConfig":  "create unique user config",
+                                                                         "authenticator":  "idp-create-user-if-unique",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "ALTERNATIVE",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticatorFlow":  true,
+                                                                         "requirement":  "ALTERNATIVE",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  true,
+                                                                         "flowAlias":  "Handle Existing Account",
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "4d8553cb-6fa7-437c-a8b6-b5a528b33500",
+                                    "alias":  "Verify Existing Account by Re-authentication",
+                                    "description":  "Reauthentication of existing account",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  false,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "idp-username-password-form",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticatorFlow":  true,
+                                                                         "requirement":  "CONDITIONAL",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  true,
+                                                                         "flowAlias":  "First broker login - Conditional OTP",
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "b8e23f1e-38fe-4560-bbf4-4e2c22dcde4e",
+                                    "alias":  "browser",
+                                    "description":  "Browser based authentication",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  true,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "auth-cookie",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "ALTERNATIVE",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "auth-spnego",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "DISABLED",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "identity-provider-redirector",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "ALTERNATIVE",
+                                                                         "priority":  25,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticatorFlow":  true,
+                                                                         "requirement":  "ALTERNATIVE",
+                                                                         "priority":  26,
+                                                                         "autheticatorFlow":  true,
+                                                                         "flowAlias":  "Organization",
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticatorFlow":  true,
+                                                                         "requirement":  "ALTERNATIVE",
+                                                                         "priority":  30,
+                                                                         "autheticatorFlow":  true,
+                                                                         "flowAlias":  "forms",
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "b78b3117-d5b4-4040-bb4f-ee07f9955700",
+                                    "alias":  "clients",
+                                    "description":  "Base authentication for clients",
+                                    "providerId":  "client-flow",
+                                    "topLevel":  true,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "client-secret",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "ALTERNATIVE",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "client-jwt",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "ALTERNATIVE",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "client-secret-jwt",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "ALTERNATIVE",
+                                                                         "priority":  30,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "client-x509",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "ALTERNATIVE",
+                                                                         "priority":  40,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "2c16429a-7323-4921-a632-8a619292f5e8",
+                                    "alias":  "direct grant",
+                                    "description":  "OpenID Connect Resource Owner Grant",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  true,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "direct-grant-validate-username",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "direct-grant-validate-password",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticatorFlow":  true,
+                                                                         "requirement":  "CONDITIONAL",
+                                                                         "priority":  30,
+                                                                         "autheticatorFlow":  true,
+                                                                         "flowAlias":  "Direct Grant - Conditional OTP",
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "d2ac12ed-bb8e-4d25-8c94-70c26db289c4",
+                                    "alias":  "docker auth",
+                                    "description":  "Used by Docker clients to authenticate against the IDP",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  true,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "docker-http-basic-authenticator",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "38d9a893-0dc0-41b2-b4ed-d7282ce72a1d",
+                                    "alias":  "first broker login",
+                                    "description":  "Actions taken after first broker login with identity provider account, which is not yet linked to any Keycloak account",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  true,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticatorConfig":  "review profile config",
+                                                                         "authenticator":  "idp-review-profile",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticatorFlow":  true,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  true,
+                                                                         "flowAlias":  "User creation or linking",
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticatorFlow":  true,
+                                                                         "requirement":  "CONDITIONAL",
+                                                                         "priority":  50,
+                                                                         "autheticatorFlow":  true,
+                                                                         "flowAlias":  "First Broker Login - Conditional Organization",
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "56a1e11c-9eb2-4224-a2c7-183afa53c023",
+                                    "alias":  "forms",
+                                    "description":  "Username, password, otp and other auth forms.",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  false,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "auth-username-password-form",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticatorFlow":  true,
+                                                                         "requirement":  "CONDITIONAL",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  true,
+                                                                         "flowAlias":  "Browser - Conditional OTP",
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "3d883cae-17a1-479c-9db1-56cf3f78b4db",
+                                    "alias":  "registration",
+                                    "description":  "Registration flow",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  true,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "registration-page-form",
+                                                                         "authenticatorFlow":  true,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  true,
+                                                                         "flowAlias":  "registration form",
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "ac2ab1b2-de41-4370-afed-6edbbe985625",
+                                    "alias":  "registration form",
+                                    "description":  "Registration form",
+                                    "providerId":  "form-flow",
+                                    "topLevel":  false,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "registration-user-creation",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "registration-password-action",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  50,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "registration-recaptcha-action",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "DISABLED",
+                                                                         "priority":  60,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "registration-terms-and-conditions",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "DISABLED",
+                                                                         "priority":  70,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "e4b99392-8218-4137-a586-dfe295510003",
+                                    "alias":  "reset credentials",
+                                    "description":  "Reset credentials for a user if they forgot their password or something",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  true,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "reset-credentials-choose-user",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "reset-credential-email",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  20,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticator":  "reset-password",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  30,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     },
+                                                                     {
+                                                                         "authenticatorFlow":  true,
+                                                                         "requirement":  "CONDITIONAL",
+                                                                         "priority":  40,
+                                                                         "autheticatorFlow":  true,
+                                                                         "flowAlias":  "Reset - Conditional OTP",
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                },
+                                {
+                                    "id":  "59a37705-d4e9-4312-95e3-ef87d8e3e894",
+                                    "alias":  "saml ecp",
+                                    "description":  "SAML ECP Profile Authentication Flow",
+                                    "providerId":  "basic-flow",
+                                    "topLevel":  true,
+                                    "builtIn":  true,
+                                    "authenticationExecutions":  [
+                                                                     {
+                                                                         "authenticator":  "http-basic-authenticator",
+                                                                         "authenticatorFlow":  false,
+                                                                         "requirement":  "REQUIRED",
+                                                                         "priority":  10,
+                                                                         "autheticatorFlow":  false,
+                                                                         "userSetupAllowed":  false
+                                                                     }
+                                                                 ]
+                                }
+                            ],
+    "authenticatorConfig":  [
+                                {
+                                    "id":  "197f3607-a9b6-4094-bedd-628084ff3e38",
+                                    "alias":  "create unique user config",
+                                    "config":  {
+                                                   "require.password.update.after.registration":  "false"
+                                               }
+                                },
+                                {
+                                    "id":  "71a723b0-d5eb-48e5-9a00-bf3a9b0714a1",
+                                    "alias":  "review profile config",
+                                    "config":  {
+                                                   "update.profile.on.first.login":  "missing"
+                                               }
+                                }
+                            ],
+    "requiredActions":  [
+                            {
+                                "alias":  "CONFIGURE_TOTP",
+                                "name":  "Configure OTP",
+                                "providerId":  "CONFIGURE_TOTP",
+                                "enabled":  true,
+                                "defaultAction":  false,
+                                "priority":  10,
+                                "config":  {
+
+                                           }
+                            },
+                            {
+                                "alias":  "TERMS_AND_CONDITIONS",
+                                "name":  "Terms and Conditions",
+                                "providerId":  "TERMS_AND_CONDITIONS",
+                                "enabled":  false,
+                                "defaultAction":  false,
+                                "priority":  20,
+                                "config":  {
+
+                                           }
+                            },
+                            {
+                                "alias":  "UPDATE_PASSWORD",
+                                "name":  "Update Password",
+                                "providerId":  "UPDATE_PASSWORD",
+                                "enabled":  true,
+                                "defaultAction":  false,
+                                "priority":  30,
+                                "config":  {
+
+                                           }
+                            },
+                            {
+                                "alias":  "UPDATE_PROFILE",
+                                "name":  "Update Profile",
+                                "providerId":  "UPDATE_PROFILE",
+                                "enabled":  true,
+                                "defaultAction":  false,
+                                "priority":  40,
+                                "config":  {
+
+                                           }
+                            },
+                            {
+                                "alias":  "VERIFY_EMAIL",
+                                "name":  "Verify Email",
+                                "providerId":  "VERIFY_EMAIL",
+                                "enabled":  true,
+                                "defaultAction":  false,
+                                "priority":  50,
+                                "config":  {
+
+                                           }
+                            },
+                            {
+                                "alias":  "delete_account",
+                                "name":  "Delete Account",
+                                "providerId":  "delete_account",
+                                "enabled":  false,
+                                "defaultAction":  false,
+                                "priority":  60,
+                                "config":  {
+
+                                           }
+                            },
+                            {
+                                "alias":  "webauthn-register",
+                                "name":  "Webauthn Register",
+                                "providerId":  "webauthn-register",
+                                "enabled":  true,
+                                "defaultAction":  false,
+                                "priority":  70,
+                                "config":  {
+
+                                           }
+                            },
+                            {
+                                "alias":  "webauthn-register-passwordless",
+                                "name":  "Webauthn Register Passwordless",
+                                "providerId":  "webauthn-register-passwordless",
+                                "enabled":  true,
+                                "defaultAction":  false,
+                                "priority":  80,
+                                "config":  {
+
+                                           }
+                            },
+                            {
+                                "alias":  "VERIFY_PROFILE",
+                                "name":  "Verify Profile",
+                                "providerId":  "VERIFY_PROFILE",
+                                "enabled":  true,
+                                "defaultAction":  false,
+                                "priority":  90,
+                                "config":  {
+
+                                           }
+                            },
+                            {
+                                "alias":  "delete_credential",
+                                "name":  "Delete Credential",
+                                "providerId":  "delete_credential",
+                                "enabled":  true,
+                                "defaultAction":  false,
+                                "priority":  100,
+                                "config":  {
+
+                                           }
+                            },
+                            {
+                                "alias":  "update_user_locale",
+                                "name":  "Update User Locale",
+                                "providerId":  "update_user_locale",
+                                "enabled":  true,
+                                "defaultAction":  false,
+                                "priority":  1000,
+                                "config":  {
+
+                                           }
+                            }
+                        ],
+    "browserFlow":  "browser",
+    "registrationFlow":  "registration",
+    "directGrantFlow":  "direct grant",
+    "resetCredentialsFlow":  "reset credentials",
+    "clientAuthenticationFlow":  "clients",
+    "dockerAuthenticationFlow":  "docker auth",
+    "firstBrokerLoginFlow":  "first broker login",
+    "attributes":  {
+                       "cibaBackchannelTokenDeliveryMode":  "poll",
+                       "cibaExpiresIn":  "120",
+                       "cibaAuthRequestedUserHint":  "login_hint",
+                       "oauth2DeviceCodeLifespan":  "600",
+                       "oauth2DevicePollingInterval":  "5",
+                       "parRequestUriLifespan":  "60",
+                       "cibaInterval":  "5",
+                       "realmReusableOtpCode":  "false"
+                   },
+    "keycloakVersion":  "26.0.7",
+    "userManagedAccessAllowed":  false,
+    "organizationsEnabled":  false,
+    "clientProfiles":  {
+                           "profiles":  [
+
+                                        ]
+                       },
+    "clientPolicies":  {
+                           "policies":  [
+
+                                        ]
+                       }
+}
