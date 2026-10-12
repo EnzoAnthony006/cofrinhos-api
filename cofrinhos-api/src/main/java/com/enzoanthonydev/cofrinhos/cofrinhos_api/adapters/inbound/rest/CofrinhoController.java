@@ -5,6 +5,7 @@ import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Dinheiro;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.BuscarCofrinhoUseCase;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.CofrinhoResumo;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.CriarCofrinhoUseCase;
+import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.ListarCofrinhosDoUsuarioUseCase;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -20,10 +22,14 @@ public class CofrinhoController {
 
     private final CriarCofrinhoUseCase criarCofrinhoUseCase;
     private final BuscarCofrinhoUseCase buscarCofrinhoUseCase;
+    private final ListarCofrinhosDoUsuarioUseCase listarCofrinhosDoUsuarioUseCase;
 
-    public CofrinhoController(CriarCofrinhoUseCase criarCofrinhoUseCase, BuscarCofrinhoUseCase buscarCofrinhoUseCase) {
+    public CofrinhoController(CriarCofrinhoUseCase criarCofrinhoUseCase,
+                              BuscarCofrinhoUseCase buscarCofrinhoUseCase,
+                              ListarCofrinhosDoUsuarioUseCase listarCofrinhosDoUsuarioUseCase) {
         this.criarCofrinhoUseCase = criarCofrinhoUseCase;
         this.buscarCofrinhoUseCase = buscarCofrinhoUseCase;
+        this.listarCofrinhosDoUsuarioUseCase = listarCofrinhosDoUsuarioUseCase;
     }
 
     @PostMapping
@@ -37,6 +43,16 @@ public class CofrinhoController {
                 Dinheiro.de(request.valorMeta())
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(CofrinhoResponse.de(cofrinho));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CofrinhoResponse>> listar(@AuthenticationPrincipal Jwt jwt) {
+        List<CofrinhoResponse> cofrinhos = listarCofrinhosDoUsuarioUseCase
+                .executar(UsuarioAutenticado.id(jwt))
+                .stream()
+                .map(resumo -> CofrinhoResponse.de(resumo))
+                .toList();
+        return ResponseEntity.ok(cofrinhos);
     }
 
     @GetMapping("/{id}")

@@ -17,6 +17,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -82,5 +83,30 @@ class CofrinhoRepositoryJpaAdapterTest {
         assertTrue(encontrado.isPresent());
         assertEquals(StatusCofrinho.CONCLUIDO, encontrado.get().getStatus());
         assertEquals(Dinheiro.de(new BigDecimal("150")), encontrado.get().getValorAcumulado());
+    }
+
+    @Test
+    void deveListarApenasOsCofrinhosDoUsuarioOrdenadosPorNome() {
+        UUID usuarioA = UUID.randomUUID();
+        UUID usuarioB = UUID.randomUUID();
+
+        cofrinhoRepository.salvar(Cofrinho.criar(usuarioA, "Viagem", "descricao",
+                CategoriaInvestimento.ECONOMIA, Dinheiro.de(new BigDecimal("1000"))));
+        cofrinhoRepository.salvar(Cofrinho.criar(usuarioA, "Carro", "descricao",
+                CategoriaInvestimento.ECONOMIA, Dinheiro.de(new BigDecimal("5000"))));
+        cofrinhoRepository.salvar(Cofrinho.criar(usuarioB, "Casa", "descricao",
+                CategoriaInvestimento.ECONOMIA, Dinheiro.de(new BigDecimal("9000"))));
+
+        List<Cofrinho> doUsuarioA = cofrinhoRepository.buscarPorUsuarioId(usuarioA);
+
+        assertEquals(List.of("Carro", "Viagem"), doUsuarioA.stream().map(Cofrinho::getNome).toList());
+        assertTrue(doUsuarioA.stream().allMatch(c -> c.getUsuarioId().equals(usuarioA)));
+    }
+
+    @Test
+    void deveRetornarListaVaziaQuandoUsuarioNaoTemCofrinhos() {
+        List<Cofrinho> cofrinhos = cofrinhoRepository.buscarPorUsuarioId(UUID.randomUUID());
+
+        assertTrue(cofrinhos.isEmpty());
     }
 }
