@@ -5,6 +5,7 @@ import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Cofrinho;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Dinheiro;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.StatusCofrinho;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.aporte.Aporte;
+import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.CofrinhoNaoEncontradoException;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.CofrinhoRepository;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.aporte.AporteEventPublisher;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.aporte.AporteRegistradoEvent;
@@ -23,7 +24,9 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -45,14 +48,15 @@ class RegistrarAporteUseCaseTest {
     @Test
     void deveRegistrarAporteEPublicarEventoComDadosDoCofrinho() {
         UUID cofrinhoId = UUID.randomUUID();
-        Cofrinho cofrinho = Cofrinho.criar(UUID.randomUUID(), "Viagem", "descricao",
+        UUID usuarioId = UUID.randomUUID();
+        Cofrinho cofrinho = Cofrinho.criar(usuarioId, "Viagem", "descricao",
                 CategoriaInvestimento.ECONOMIA, Dinheiro.de(new BigDecimal("1000")));
 
         when(cofrinhoRepository.buscarPorId(cofrinhoId)).thenReturn(Optional.of(cofrinho));
         when(aporteRepository.salvar(any(Aporte.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         Dinheiro valor = Dinheiro.de(new BigDecimal("250"));
-        Aporte resultado = useCase().executar(cofrinhoId, valor);
+        Aporte resultado = useCase().executar(cofrinhoId, usuarioId, valor);
 
         assertEquals(cofrinhoId, resultado.getCofrinhoId());
         assertEquals(valor, resultado.getValor());
@@ -64,7 +68,7 @@ class RegistrarAporteUseCaseTest {
 
         AporteRegistradoEvent evento = captor.getValue();
         assertEquals(cofrinhoId, evento.cofrinhoId());
-        assertEquals(cofrinho.getUsuarioId(), evento.usuarioId());
+        assertEquals(usuarioId, evento.usuarioId());
         assertEquals(valor.valor(), evento.valor());
         assertEquals(StatusCofrinho.ATIVO, evento.statusCofrinho());
         assertEquals(CategoriaInvestimento.ECONOMIA, evento.categoriaCofrinho());
@@ -73,13 +77,14 @@ class RegistrarAporteUseCaseTest {
     @Test
     void deveMarcarEventoComStatusConcluidoQuandoAporteBateAMeta() {
         UUID cofrinhoId = UUID.randomUUID();
-        Cofrinho cofrinho = Cofrinho.criar(UUID.randomUUID(), "Viagem", "descricao",
+        UUID usuarioId = UUID.randomUUID();
+        Cofrinho cofrinho = Cofrinho.criar(usuarioId, "Viagem", "descricao",
                 CategoriaInvestimento.RESERVA_EMERGENCIA, Dinheiro.de(new BigDecimal("100")));
 
         when(cofrinhoRepository.buscarPorId(cofrinhoId)).thenReturn(Optional.of(cofrinho));
         when(aporteRepository.salvar(any(Aporte.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        useCase().executar(cofrinhoId, Dinheiro.de(new BigDecimal("150")));
+        useCase().executar(cofrinhoId, usuarioId, Dinheiro.de(new BigDecimal("150")));
 
         ArgumentCaptor<AporteRegistradoEvent> captor = ArgumentCaptor.forClass(AporteRegistradoEvent.class);
         verify(aporteEventPublisher).publicar(captor.capture());
@@ -93,7 +98,26 @@ class RegistrarAporteUseCaseTest {
         UUID cofrinhoId = UUID.randomUUID();
         when(cofrinhoRepository.buscarPorId(cofrinhoId)).thenReturn(Optional.empty());
 
-        assertThrows(IllegalArgumentException.class, () ->
-                useCase().executar(cofrinhoId, Dinheiro.de(new BigDecimal("100"))));
+        assertThrows(CofrinhoNaoEncontradoException.class, () ->
+                useCase().executar(cofrinhoId, UUID.randomUUID(), Dinheiro.de(new BigDecimal("100"))));
+
+        verifyNoInteractions(aporteRepository, aporteEventPublisher);
+    }
+
+    @Test
+    void naoDeveRegistrarAporteQuandoCofrinhoPertenceAOutroUsuario() {
+        UUID cofrinhoId = UUID.randomUUID();
+        UUID dono = UUID.randomUUID();
+        UUID intruso = UUID.randomUUID();
+        Cofrinho cofrinho = Cofrinho.criar(dono, "Viagem", "descricao",
+                CategoriaInvestimento.ECONOMIA, Dinheiro.de(new BigDecimal("1000")));
+
+        when(cofrinhoRepository.buscarPorId(cofrinhoId)).thenReturn(Optional.of(cofrinho));
+
+        assertThrows(CofrinhoNaoEncontradoException.class, () ->
+                useCase().executar(cofrinhoId, intruso, Dinheiro.de(new BigDecimal("100"))));
+
+        verify(cofrinhoRepository, never()).salvar(any(Cofrinho.class));
+        verifyNoInteractions(aporteRepository, aporteEventPublisher);
     }
 }

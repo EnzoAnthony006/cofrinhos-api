@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.oauth2.jwt.Jwt;
 import reactor.test.StepVerifier;
 
 import java.time.LocalDate;
@@ -42,6 +43,13 @@ class DashboardControllerTest {
         return new DashboardController(buscarPerfilXPUseCase, buscarConquistasUseCase, buscarPosicaoNoRankingUseCase);
     }
 
+    private Jwt jwtDe(UUID usuarioId) {
+        return Jwt.withTokenValue("token-de-teste")
+                .header("alg", "none")
+                .subject(usuarioId.toString())
+                .build();
+    }
+
     @Test
     void deveMontarDashboardComPerfilConquistasEPosicaoNoRanking() {
         UUID usuarioId = UUID.randomUUID();
@@ -55,7 +63,7 @@ class DashboardControllerTest {
         when(buscarConquistasUseCase.executar(usuarioId)).thenReturn(List.of(conquista));
         when(buscarPosicaoNoRankingUseCase.executar(usuarioId)).thenReturn(Optional.of(posicao));
 
-        StepVerifier.create(controller().buscar(usuarioId))
+        StepVerifier.create(controller().buscar(jwtDe(usuarioId)))
                 .assertNext(dashboard -> {
                     assertEquals(usuarioId, dashboard.usuarioId());
                     assertEquals(150, dashboard.perfil().xpTotal());
@@ -75,7 +83,7 @@ class DashboardControllerTest {
         when(buscarConquistasUseCase.executar(usuarioId)).thenReturn(List.of());
         when(buscarPosicaoNoRankingUseCase.executar(usuarioId)).thenReturn(Optional.empty());
 
-        StepVerifier.create(controller().buscar(usuarioId))
+        StepVerifier.create(controller().buscar(jwtDe(usuarioId)))
                 .assertNext(dashboard -> {
                     assertEquals(usuarioId, dashboard.perfil().usuarioId());
                     assertEquals(0, dashboard.perfil().xpTotal());
