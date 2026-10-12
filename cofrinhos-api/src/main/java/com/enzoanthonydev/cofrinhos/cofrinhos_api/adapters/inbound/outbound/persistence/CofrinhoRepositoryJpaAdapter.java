@@ -5,6 +5,7 @@ import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Dinheiro;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.CofrinhoRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,6 +28,14 @@ public class CofrinhoRepositoryJpaAdapter implements CofrinhoRepository {
     @Override
     public Optional<Cofrinho> buscarPorId(UUID id) {
         return springDataRepository.findById(id).map(this::paraDominio);
+    }
+
+    @Override
+    public List<Cofrinho> buscarPorUsuarioId(UUID usuarioId) {
+        return springDataRepository.findByUsuarioIdOrderByNomeAsc(usuarioId)
+                .stream()
+                .map(this::paraDominio)
+                .toList();
     }
 
     private CofrinhoJpaEntity paraEntity(Cofrinho cofrinho) {
