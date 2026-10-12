@@ -3,15 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>Cofrinhos</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f9d63'/%3E%3Ctext x='16' y='23' font-size='20' font-weight='700' text-anchor='middle' fill='white' font-family='sans-serif'%3EC%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<h1>Cofrinhos</h1>
-<p id="status">Carregando...</p>
-<button id="btn-login" hidden>Entrar</button>
-<button id="btn-logout" hidden>Sair</button>
-<button id="btn-listar" hidden>Listar meus cofrinhos</button>
-<pre id="saida"></pre>
+
+<header class="topbar" id="barra-topo" hidden>
+    <div class="container topbar__inner">
+        <div class="brand">
+            <span class="brand__mark">C</span>
+            <span class="brand__name">Cofrinhos</span>
+        </div>
+        <nav class="tabs" aria-label="Seções">
+            <button class="tab" data-tela="dashboard">Dashboard</button>
+            <button class="tab" data-tela="cofrinhos">Meus cofrinhos</button>
+            <button class="tab" data-tela="ranking">Ranking</button>
+        </nav>
+        <div class="user">
+            <span class="user__name" id="usuario-nome"></span>
+            <button class="btn btn--ghost" id="btn-logout">Sair</button>
+        </div>
+    </div>
+</header>
+
+<section class="hero" id="tela-login" hidden>
+    <div class="hero__card">
+        <span class="brand__mark brand__mark--lg">C</span>
+        <h1 class="hero__title">Cofrinhos</h1>
+        <p class="hero__subtitle">
+            Guarde dinheiro por objetivo, ganhe XP, mantenha sua sequência de aportes e suba no ranking.
+        </p>
+        <div class="hero__chips">
+            <span class="chip">Metas</span>
+            <span class="chip">XP e conquistas</span>
+            <span class="chip">Ranking ao vivo</span>
+        </div>
+        <button class="btn btn--primary btn--lg" id="btn-login">Entrar</button>
+        <p class="notice" id="aviso-login" role="alert" hidden></p>
+    </div>
+</section>
+
+<main class="container" id="conteudo" hidden>
+
+    <section class="tela" id="tela-dashboard" hidden>
+        <div class="tela__header">
+            <h1>Dashboard</h1>
+        </div>
+        <div class="empty">
+            <h3>Em construção</h3>
+            <p>Seu XP, sequência e conquistas aparecem aqui na próxima etapa.</p>
+        </div>
+    </section>
+
+    <section class="tela" id="tela-cofrinhos" hidden>
+        <div class="tela__header">
+            <h1>Meus cofrinhos</h1>
+        </div>
+        <div class="grid" id="lista-cofrinhos"></div>
+    </section>
+
+    <section class="tela" id="tela-ranking" hidden>
+        <div class="tela__header">
+            <h1>Ranking</h1>
+        </div>
+        <div class="empty">
+            <h3>Em construção</h3>
+            <p>O ranking ao vivo aparece aqui na próxima etapa.</p>
+        </div>
+    </section>
+
+</main>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
 <script type="module" src="/js/app.js"></script>
 </body>
 </html>
