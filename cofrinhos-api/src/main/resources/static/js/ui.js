@@ -10,7 +10,9 @@ export const ROTULOS_CATEGORIA = {
 };
 
 export const ROTULOS_CONQUISTA = {
-    STREAK_QUATRO_SEMANAS: 'Quatro semanas seguidas',
+    PRIMEIRO_COFRINHO_CONCLUIDO: 'Primeiro cofrinho concluído',
+    PRIMEIRA_RESERVA_EMERGENCIA_COMPLETA: 'Reserva de emergência completa',
+    STREAK_QUATRO_SEMANAS: 'Streak de 4 semanas',
 };
 
 export function el(tag, classe, texto) {
