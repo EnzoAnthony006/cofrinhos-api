@@ -1,6 +1,13 @@
 import { iniciarAutenticacao, login, logout, usuarioAtual } from './auth.js';
-import { buscarDashboard, listarCofrinhos, listarRanking } from './api.js';
 import {
+    buscarDashboard,
+    criarCofrinho,
+    listarCofrinhos,
+    listarRanking,
+    registrarAporte,
+} from './api.js';
+import {
+    ROTULOS_CATEGORIA,
     abreviarId,
     el,
     formatarData,
@@ -8,6 +15,7 @@ import {
     formatarNumero,
     formatarPercentual,
     humanizar,
+    mostrarToast,
     rotuloCategoria,
 } from './ui.js';
 
@@ -19,12 +27,36 @@ const nomeUsuario = document.getElementById('usuario-nome');
 const conteudoDashboard = document.getElementById('conteudo-dashboard');
 const listaCofrinhos = document.getElementById('lista-cofrinhos');
 const listaRanking = document.getElementById('lista-ranking');
+const formNovoCofrinho = document.getElementById('form-novo-cofrinho');
+const botaoNovoCofrinho = document.getElementById('btn-novo-cofrinho');
+const botaoSalvarCofrinho = document.getElementById('btn-salvar-cofrinho');
+const campoCategoria = document.getElementById('campo-categoria');
 const abas = document.querySelectorAll('.tab');
 const telas = document.querySelectorAll('.tela');
 
 const ROTULOS_STATUS = { ATIVO: 'Ativo', CONCLUIDO: 'Concluído' };
 const CLASSES_STATUS = { ATIVO: 'badge--ativo', CONCLUIDO: 'badge--concluido' };
 const LIMITE_RANKING = 10;
+const XP_POR_NIVEL = 500;
+const TENTATIVAS_XP = 6;
+const INTERVALO_XP_MS = 1000;
+
+function esperar(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function criarBarraProgresso(percentual, rotulo) {
+    const barra = el('div', 'progress');
+    barra.setAttribute('role', 'progressbar');
+    barra.setAttribute('aria-label', rotulo);
+    barra.setAttribute('aria-valuemin', '0');
+    barra.setAttribute('aria-valuemax', '100');
+    barra.setAttribute('aria-valuenow', String(Math.round(percentual)));
+    const preenchimento = el('div', 'progress__bar');
+    preenchimento.style.width = `${percentual}%`;
+    barra.append(preenchimento);
+    return barra;
+}
 
 
 function criarEstatistica(rotulo, valor, dica) {
@@ -33,6 +65,17 @@ function criarEstatistica(rotulo, valor, dica) {
     if (dica) {
         cartao.append(el('div', 'stat__hint', dica));
     }
+    return cartao;
+}
+
+function criarCartaoNivel(perfil) {
+    const xpNoNivel = perfil.xpTotal % XP_POR_NIVEL;
+    const restante = XP_POR_NIVEL - xpNoNivel;
+    const cartao = criarEstatistica('Nível', formatarNumero(perfil.nivel));
+    cartao.append(
+        criarBarraProgresso((xpNoNivel / XP_POR_NIVEL) * 100, 'Progresso até o próximo nível'),
+        el('div', 'stat__hint', `${formatarNumero(restante)} XP para o nível ${perfil.nivel + 1}`),
+    );
     return cartao;
 }
 
@@ -59,6 +102,7 @@ async function carregarDashboard() {
     conteudoDashboard.replaceChildren(el('p', 'muted', 'Carregando seu progresso...'));
     try {
         const { perfil, posicaoNoRanking, conquistas } = await buscarDashboard();
+        const semanas = perfil.sequenciaAtual === 1 ? 'semana' : 'semanas';
 
         const estatisticas = el('div', 'stats');
         estatisticas.append(
@@ -67,11 +111,11 @@ async function carregarDashboard() {
                 formatarNumero(perfil.xpTotal),
                 `Última atividade: ${formatarData(perfil.dataUltimaAtividade)}`,
             ),
-            criarEstatistica('Nível', formatarNumero(perfil.nivel)),
+            criarCartaoNivel(perfil),
             criarEstatistica(
                 'Sequência',
-                formatarNumero(perfil.sequenciaAtual),
-                `Melhor: ${formatarNumero(perfil.melhorSequencia)}`,
+                `${formatarNumero(perfil.sequenciaAtual)} ${semanas}`,
+                `Melhor sequência: ${formatarNumero(perfil.melhorSequencia)}`,
             ),
             criarEstatistica(
                 'Posição no ranking',
@@ -86,6 +130,68 @@ async function carregarDashboard() {
             el('div', 'notice', `Não foi possível carregar o dashboard: ${erro.message}`),
         );
     }
+}
+
+
+async function lerXpAtual() {
+    try {
+        const { perfil } = await buscarDashboard();
+        return perfil.xpTotal;
+    } catch {
+        return null;
+    }
+}
+
+async function anunciarXpGanho(xpAntes) {
+    if (xpAntes === null) {
+        return;
+    }
+    for (let tentativa = 0; tentativa < TENTATIVAS_XP; tentativa += 1) {
+        await esperar(INTERVALO_XP_MS);
+        const xpDepois = await lerXpAtual();
+        if (xpDepois !== null && xpDepois > xpAntes) {
+            mostrarToast(`+${formatarNumero(xpDepois - xpAntes)} XP`, 'xp');
+            return;
+        }
+    }
+}
+
+async function aportar(cofrinho, valor, campo, botao) {
+    botao.disabled = true;
+    try {
+        const xpAntes = await lerXpAtual();
+        await registrarAporte(cofrinho.id, valor);
+        mostrarToast(`Aporte de ${formatarMoeda(valor)} registrado em "${cofrinho.nome}".`);
+        campo.value = '';
+        await carregarCofrinhos();
+        anunciarXpGanho(xpAntes);
+    } catch (erro) {
+        mostrarToast(erro.message, 'erro');
+    } finally {
+        botao.disabled = false;
+    }
+}
+
+function criarFormularioAporte(cofrinho) {
+    const form = el('form', 'aporte');
+    const campo = el('input', 'input');
+    campo.type = 'number';
+    campo.min = '0.01';
+    campo.step = '0.01';
+    campo.required = true;
+    campo.inputMode = 'decimal';
+    campo.placeholder = 'Valor do aporte (R$)';
+    campo.setAttribute('aria-label', `Valor do aporte em ${cofrinho.nome}`);
+
+    const botao = el('button', 'btn btn--primary', 'Aportar');
+    botao.type = 'submit';
+
+    form.append(campo, botao);
+    form.addEventListener('submit', (evento) => {
+        evento.preventDefault();
+        aportar(cofrinho, Number(campo.value), campo, botao);
+    });
+    return form;
 }
 
 
@@ -115,16 +221,7 @@ function criarCartaoCofrinho(cofrinho) {
     );
     cartao.append(valores);
 
-    const barra = el('div', 'progress');
-    barra.setAttribute('role', 'progressbar');
-    barra.setAttribute('aria-label', `Progresso de ${cofrinho.nome}`);
-    barra.setAttribute('aria-valuemin', '0');
-    barra.setAttribute('aria-valuemax', '100');
-    barra.setAttribute('aria-valuenow', String(Math.round(progresso)));
-    const preenchimento = el('div', 'progress__bar');
-    preenchimento.style.width = `${progresso}%`;
-    barra.append(preenchimento);
-    cartao.append(barra);
+    cartao.append(criarBarraProgresso(progresso, `Progresso de ${cofrinho.nome}`));
 
     const rodape = el('div', 'cofrinho__rodape');
     rodape.append(
@@ -133,6 +230,10 @@ function criarCartaoCofrinho(cofrinho) {
     );
     cartao.append(rodape);
 
+    if (cofrinho.status === 'ATIVO') {
+        cartao.append(criarFormularioAporte(cofrinho));
+    }
+
     return cartao;
 }
 
@@ -140,7 +241,7 @@ function criarEstadoVazioCofrinhos() {
     const vazio = el('div', 'empty');
     vazio.append(
         el('h3', null, 'Nenhum cofrinho ainda'),
-        el('p', null, 'Quando você criar seu primeiro cofrinho, ele aparece aqui.'),
+        el('p', null, 'Clique em "Novo cofrinho" para criar o primeiro.'),
     );
     return vazio;
 }
@@ -159,6 +260,48 @@ async function carregarCofrinhos() {
             el('div', 'notice', `Não foi possível carregar seus cofrinhos: ${erro.message}`),
         );
     }
+}
+
+function abrirFormularioNovoCofrinho() {
+    formNovoCofrinho.hidden = false;
+    document.getElementById('campo-nome').focus();
+}
+
+function fecharFormularioNovoCofrinho() {
+    formNovoCofrinho.reset();
+    formNovoCofrinho.hidden = true;
+}
+
+function prepararFormularioNovoCofrinho() {
+    Object.entries(ROTULOS_CATEGORIA).forEach(([valor, rotulo]) => {
+        const opcao = el('option', null, rotulo);
+        opcao.value = valor;
+        campoCategoria.append(opcao);
+    });
+
+    botaoNovoCofrinho.addEventListener('click', abrirFormularioNovoCofrinho);
+    document.getElementById('btn-cancelar-cofrinho').addEventListener('click', fecharFormularioNovoCofrinho);
+
+    formNovoCofrinho.addEventListener('submit', async (evento) => {
+        evento.preventDefault();
+        const dados = new FormData(formNovoCofrinho);
+        botaoSalvarCofrinho.disabled = true;
+        try {
+            await criarCofrinho({
+                nome: String(dados.get('nome')).trim(),
+                descricao: String(dados.get('descricao')).trim(),
+                categoria: dados.get('categoria'),
+                valorMeta: Number(dados.get('valorMeta')),
+            });
+            mostrarToast('Cofrinho criado!');
+            fecharFormularioNovoCofrinho();
+            await carregarCofrinhos();
+        } catch (erro) {
+            mostrarToast(erro.message, 'erro');
+        } finally {
+            botaoSalvarCofrinho.disabled = false;
+        }
+    });
 }
 
 
@@ -251,6 +394,7 @@ async function iniciar() {
     }
 }
 
+prepararFormularioNovoCofrinho();
 document.getElementById('btn-login').addEventListener('click', () => login());
 document.getElementById('btn-logout').addEventListener('click', () => logout());
 document.getElementById('btn-atualizar-ranking').addEventListener('click', () => carregarRanking());

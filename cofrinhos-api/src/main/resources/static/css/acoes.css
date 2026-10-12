@@ -1,0 +1,39 @@
+.form-novo {
+    margin-bottom: 24px;
+}
+
+.form-linha {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.form-acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+textarea.input {
+    resize: vertical;
+}
+
+.aporte {
+    display: flex;
+    gap: 8px;
+}
+
+.aporte .input {
+    flex: 1;
+    min-width: 0;
+}
+
+.stat .progress {
+    margin: 10px 0 8px;
+}
+
+@media (max-width: 560px) {
+    .form-linha {
+        grid-template-columns: 1fr;
+    }
+}

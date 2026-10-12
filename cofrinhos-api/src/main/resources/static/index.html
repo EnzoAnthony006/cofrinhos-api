@@ -7,6 +7,7 @@
     <title>Cofrinhos</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f9d63'/%3E%3Ctext x='16' y='23' font-size='20' font-weight='700' text-anchor='middle' fill='white' font-family='sans-serif'%3EC%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/acoes.css">
 </head>
 <body>
 
@@ -57,7 +58,36 @@
     <section class="tela" id="tela-cofrinhos" hidden>
         <div class="tela__header">
             <h1>Meus cofrinhos</h1>
+            <button class="btn btn--primary" id="btn-novo-cofrinho">Novo cofrinho</button>
         </div>
+
+        <form class="card form-novo" id="form-novo-cofrinho" hidden>
+            <h2 class="secao-titulo">Novo cofrinho</h2>
+            <div class="field">
+                <label for="campo-nome">Nome</label>
+                <input class="input" id="campo-nome" name="nome" maxlength="80" required>
+            </div>
+            <div class="field">
+                <label for="campo-descricao">Descrição (opcional)</label>
+                <textarea class="input" id="campo-descricao" name="descricao" rows="2" maxlength="200"></textarea>
+            </div>
+            <div class="form-linha">
+                <div class="field">
+                    <label for="campo-categoria">Categoria</label>
+                    <select class="input" id="campo-categoria" name="categoria" required></select>
+                </div>
+                <div class="field">
+                    <label for="campo-meta">Meta (R$)</label>
+                    <input class="input" id="campo-meta" name="valorMeta" type="number"
+                           min="0.01" step="0.01" inputmode="decimal" required>
+                </div>
+            </div>
+            <div class="form-acoes">
+                <button type="button" class="btn btn--ghost" id="btn-cancelar-cofrinho">Cancelar</button>
+                <button type="submit" class="btn btn--primary" id="btn-salvar-cofrinho">Criar cofrinho</button>
+            </div>
+        </form>
+
         <div class="grid" id="lista-cofrinhos"></div>
     </section>
 
