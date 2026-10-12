@@ -14,10 +14,11 @@ public class BuscarCofrinhoUseCase {
         this.cofrinhoRepository = cofrinhoRepository;
     }
 
-    @Cacheable(cacheNames = CacheNames.COFRINHOS, key = "#id.toString()")
-    public CofrinhoResumo executar(UUID id) {
+    @Cacheable(cacheNames = CacheNames.COFRINHOS, key = "#id.toString() + ':' + #usuarioId.toString()")
+    public CofrinhoResumo executar(UUID id, UUID usuarioId) {
         return cofrinhoRepository.buscarPorId(id)
+                .filter(cofrinho -> cofrinho.getUsuarioId().equals(usuarioId))
                 .map(CofrinhoResumo::de)
-                .orElseThrow(() -> new IllegalArgumentException("Cofrinho não encontrado: " + id));
+                .orElseThrow(() -> new CofrinhoNaoEncontradoException(id));
     }
 }

@@ -5,8 +5,9 @@ import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.gamificacao.Buscar
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.gamificacao.BuscarPerfilXPUseCase;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.gamificacao.BuscarPosicaoNoRankingUseCase;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.gamificacao.PosicaoRanking;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -32,8 +33,10 @@ public class DashboardController {
         this.buscarPosicaoNoRankingUseCase = buscarPosicaoNoRankingUseCase;
     }
 
-    @GetMapping("/{usuarioId}")
-    public Mono<DashboardResponse> buscar(@PathVariable UUID usuarioId) {
+    @GetMapping
+    public Mono<DashboardResponse> buscar(@AuthenticationPrincipal Jwt jwt) {
+        UUID usuarioId = UsuarioAutenticado.id(jwt);
+
         Mono<PerfilXPResponse> perfil = Mono
                 .fromCallable(() -> buscarPerfilXPUseCase.buscarSeExistir(usuarioId)
                         .orElseGet(() -> PerfilXP.iniciar(usuarioId)))

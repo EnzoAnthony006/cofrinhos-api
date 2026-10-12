@@ -6,13 +6,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
-public record CriarCofrinhoRequest (
-        @NotNull UUID usuarioId,
+public record CriarCofrinhoRequest(
         @NotBlank String nome,
         String descricao,
         @NotNull CategoriaInvestimento categoria,
         @NotNull @Positive BigDecimal valorMeta
-        ) {
+) {
 }

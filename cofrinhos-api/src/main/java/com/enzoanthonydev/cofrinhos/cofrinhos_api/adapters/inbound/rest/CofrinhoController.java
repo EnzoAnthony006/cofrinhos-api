@@ -8,6 +8,8 @@ import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.CriarCofrinhoUseCa
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -25,9 +27,10 @@ public class CofrinhoController {
     }
 
     @PostMapping
-    public ResponseEntity<CofrinhoResponse> criar(@Valid @RequestBody CriarCofrinhoRequest request) {
+    public ResponseEntity<CofrinhoResponse> criar(@AuthenticationPrincipal Jwt jwt,
+                                                  @Valid @RequestBody CriarCofrinhoRequest request) {
         Cofrinho cofrinho = criarCofrinhoUseCase.executar(
-                request.usuarioId(),
+                UsuarioAutenticado.id(jwt),
                 request.nome(),
                 request.descricao(),
                 request.categoria(),
@@ -37,8 +40,9 @@ public class CofrinhoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CofrinhoResponse> buscarPorId(@PathVariable UUID id) {
-        CofrinhoResumo resumo = buscarCofrinhoUseCase.executar(id);
+    public ResponseEntity<CofrinhoResponse> buscarPorId(@AuthenticationPrincipal Jwt jwt,
+                                                        @PathVariable UUID id) {
+        CofrinhoResumo resumo = buscarCofrinhoUseCase.executar(id, UsuarioAutenticado.id(jwt));
         return ResponseEntity.ok(CofrinhoResponse.de(resumo));
     }
 }
