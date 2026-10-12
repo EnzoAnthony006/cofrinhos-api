@@ -3,12 +3,6 @@ package com.enzoanthonydev.cofrinhos.cofrinhos_api.adapters.inbound.rest;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.CategoriaInvestimento;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Cofrinho;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.StatusCofrinho;
-
-import java.math.BigDecimal;
-import java.util.UUID;
-import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.CategoriaInvestimento;
-import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.Cofrinho;
-import com.enzoanthonydev.cofrinhos.cofrinhos_api.Domain.StatusCofrinho;
 import com.enzoanthonydev.cofrinhos.cofrinhos_api.application.CofrinhoResumo;
 
 import java.math.BigDecimal;

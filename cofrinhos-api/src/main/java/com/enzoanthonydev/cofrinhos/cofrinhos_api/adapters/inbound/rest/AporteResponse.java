@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public record AporteResponse(
         UUID id,
-        UUID cofrinhoID,
+        UUID cofrinhoId,
         BigDecimal valor,
         LocalDateTime dataRegistro
 ) {
